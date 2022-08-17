@@ -1,0 +1,126 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  color: #213547;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(7, 62, 156, 1) 52%,
+    rgba(5, 100, 181, 1) 64%,
+    rgba(4, 112, 189, 1) 68%,
+    rgba(0, 212, 255, 1) 100%
+  );
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.app {
+  background-color: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  padding: 25px;
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2);
+  min-width: 320px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.input-group {
+  width: 100%;
+  margin: 10px 5px 0 5px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.input-label {
+  width: 100%;
+  text-align: left;
+}
+
+input,
+select {
+  border-radius: 5px;
+  border-width: 1px;
+  padding: 5px;
+}
+
+input.invalid,
+select.invalid {
+  border-color: #991515;
+  border-width: 2px;
+}
+
+.input-error {
+  text-align: left;
+  width: 100%;
+  min-height: 24px;
+  color: #991515;
+  max-width: 310px;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #2d8565;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  color: #ffffff;
+}
+button:hover:not(.disabled) {
+  border-color: #14440b;
+}
+button:focus:not(.disabled),
+button:focus-visible:not(.disabled) {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+button.disabled {
+  opacity: 0.5;
+  background-color: #42b88c;
+  cursor: not-allowed;
+}

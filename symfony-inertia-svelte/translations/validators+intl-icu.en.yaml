@@ -1,0 +1,16 @@
+### Entities
+# Food
+food.unique: Food {value} already exists for the selected brand.
+food.name.max_length: Name cannot exceed {limit} characters.
+food.name.not_blank: Name cannot be blank.
+food.calories.positive_or_zero: Calories must be equal to or greater than 0.
+
+# Category
+category.unique: Category {value} already exists.
+category.name.max_length: Name cannot exceed {limit} characters.
+category.name.not_blank: Name cannot be blank.
+
+# Brand
+brand.unique: Brand {value} already exists.
+brand.name.max_length: Name cannot exceed {limit} characters.
+brand.name.not_blank: Name cannot be blank.

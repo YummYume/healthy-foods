@@ -1,0 +1,20 @@
+### Common
+common.invalid_form: The form you submitted is invalid. Please check for errors and re-try.
+common.fatal_error: An unexpected error occurred. Please try again later. If the problem persists, contact an administrator.
+common.invalid_csrf: The submitted CSRF Token is invalid or expired. Please try again.
+
+### Entities
+# Entity - Food
+food.add.success: Food "{food}" was added successfully.
+food.edit.success: Food "{food}" was edited successfully.
+food.remove.success: Food "{food}" was deleted successfully.
+
+# Entity - Category
+category.add.success: Category "{category}" was added successfully.
+category.edit.success: Category "{category}" was edited successfully.
+category.remove.success: Category "{category}" was deleted successfully.
+
+# Entity - Brand
+brand.add.success: Brand "{brand}" was added successfully.
+brand.edit.success: Brand "{brand}" was edited successfully.
+brand.remove.success: Brand "{brand}" was deleted successfully.

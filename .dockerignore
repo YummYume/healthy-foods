@@ -1,0 +1,10 @@
+*.md
+*.DS_STORE
+*.git
+*.github
+symfony-inertia-svelte/node_modules/
+symfony-inertia-svelte/vendor/
+symfony-inertia-svelte/public/bundles/
+symfony-inertia-svelte/var/
+react/node_modules/
+svelte/node_modules/

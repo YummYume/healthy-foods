@@ -1,0 +1,33 @@
+.input-group {
+  width: 100%;
+  margin: 10px 5px 0 5px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.input-label {
+  width: 100%;
+  text-align: left;
+}
+
+input,
+select {
+  border-radius: 5px;
+  border-width: 1px;
+  padding: 5px;
+}
+
+input.invalid,
+select.invalid {
+  border-color: #991515;
+  border-width: 2px;
+}
+
+.input-error {
+  text-align: left;
+  width: 100%;
+  min-height: 24px;
+  color: #991515;
+  max-width: 310px;
+}

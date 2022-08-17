@@ -1,0 +1,67 @@
+### nginx ###
+nginx/logs/*
+
+### Symfony ###
+# Email spool folder
+/symfony-inertia-svelte/app/spool/*
+
+# var
+/symfony-inertia-svelte/var/*
+!/symfony-inertia-svelte/var/.gitkeep
+
+# Parameters
+/symfony-inertia-svelte/app/config/parameters.yml
+/symfony-inertia-svelte/app/config/parameters.ini
+
+# Managed by Composer
+/symfony-inertia-svelte/app/bootstrap.php.cache
+/symfony-inertia-svelte/var/bootstrap.php.cache
+/symfony-inertia-svelte/bin/*
+!/symfony-inertia-svelte/bin/console
+!/symfony-inertia-svelte/bin/symfony_requirements
+/symfony-inertia-svelte/vendor/
+
+# Assets and user uploads
+/symfony-inertia-svelte/web/bundles/
+/symfony-inertia-svelte/web/uploads/
+
+# PHPUnit
+/symfony-inertia-svelte/app/phpunit.xml
+/symfony-inertia-svelte/phpunit.xml
+
+# Build data
+/symfony-inertia-svelte/build/
+
+# Composer PHAR
+/symfony-inertia-svelte/composer.phar
+
+# Backup entities generated with doctrine:generate:entities command
+**/symfony-inertia-svelte/Entity/*~
+
+# Embedded web-server pid file
+/symfony-inertia-svelte/.web-server-pid
+
+### Symfony Patch ###
+/symfony-inertia-svelte/web/css/
+/symfony-inertia-svelte/web/js/
+
+### VisualStudioCode ###
+.vscode
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
+.ionide
+
+*.env.local

@@ -1,0 +1,98 @@
+services:
+    svelte:
+        build:
+            context: .
+            dockerfile: docker/svelte/Dockerfile
+        volumes:
+            - "./svelte:/usr/src/app:rw,cached"
+            - "/usr/src/app/node_modules"
+        stdin_open: true
+        ports:
+            - "4000:4000"
+        tty: true
+        restart: unless-stopped
+        container_name: svelte-demo
+
+    react:
+        build:
+            context: .
+            dockerfile: docker/react/Dockerfile
+        volumes:
+            - "./react:/usr/src/app:rw,cached"
+            - "/usr/src/app/node_modules"
+        stdin_open: true
+        ports:
+            - "3000:3000"
+        tty: true
+        restart: unless-stopped
+        container_name: react-demo
+
+    nginx:
+        build:
+            context: .
+            dockerfile: docker/nginx/Dockerfile
+        restart: unless-stopped
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - "./symfony-inertia-svelte/public:/app/public:rw,cached"
+            - "./nginx/logs:/logs"
+        depends_on:
+            - app
+            - db
+        container_name: nginx-demo
+        networks:
+            - symfony-network
+
+    app:
+        build:
+            context: .
+            dockerfile: docker/app/Dockerfile
+        restart: unless-stopped
+        stdin_open: true
+        volumes:
+            - "./symfony-inertia-svelte:/app:rw,cached"
+            - "/app/node_modules"
+        container_name: symfony-inertia-svelte-demo
+        networks:
+            - symfony-network
+
+    db:
+        image: mariadb:10.8.2
+        restart: unless-stopped
+        environment:
+            MARIADB_ROOT_PASSWORD: "root"
+            MARIADB_DATABASE: "app"
+            MARIADB_USER: "app"
+            MARIADB_PASSWORD: "xxx"
+        container_name: db-demo
+        networks:
+            - symfony-network
+
+    phpmyadmin:
+        image: phpmyadmin:latest
+        restart: unless-stopped
+        ports:
+            - "8080:80"
+        environment:
+            PMA_HOST: db
+        depends_on:
+            - db
+        container_name: phpmyadmin-demo
+        networks:
+            - symfony-network
+
+    mailcatcher:
+        image: sj26/mailcatcher:latest
+        ports:
+            - "1080:1080"
+        container_name: mailcatcher-demo
+        networks:
+            - symfony-network
+
+networks:
+    symfony-network:
+        driver: bridge
+
+version: "3.2"

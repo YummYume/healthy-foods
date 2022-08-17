@@ -1,0 +1,121 @@
+:root {
+  /* --- Tailwind Theme --- */
+  /* primary (violet) */
+  --color-primary-50: 245 243 255;
+  --color-primary-100: 237 233 254;
+  --color-primary-200: 221 214 254;
+  --color-primary-300: 196 181 253;
+  --color-primary-400: 167 139 250;
+  --color-primary-500: 139 92 246;
+  --color-primary-600: 124 58 237;
+  --color-primary-700: 109 40 217;
+  --color-primary-800: 91 33 182;
+  --color-primary-900: 76 29 149;
+  /* accent (rose) */
+  --color-accent-50: 255 241 242;
+  --color-accent-100: 255 228 230;
+  --color-accent-200: 254 205 211;
+  --color-accent-300: 253 164 175;
+  --color-accent-400: 251 113 133;
+  --color-accent-500: 244 63 94;
+  --color-accent-600: 225 29 72;
+  --color-accent-700: 190 18 60;
+  --color-accent-800: 159 18 57;
+  --color-accent-900: 136 19 55;
+  /* warning (orange) */
+  --color-warning-50: 255 247 237;
+  --color-warning-100: 255 237 213;
+  --color-warning-200: 254 215 170;
+  --color-warning-300: 253 186 116;
+  --color-warning-400: 251 146 60;
+  --color-warning-500: 249 115 22;
+  --color-warning-600: 234 88 12;
+  --color-warning-700: 194 65 12;
+  --color-warning-800: 154 52 18;
+  --color-warning-900: 124 45 18;
+  /* surface (gray) */
+  --color-surface-50: 249 250 251;
+  --color-surface-100: 243 244 246;
+  --color-surface-200: 229 231 235;
+  --color-surface-300: 209 213 219;
+  --color-surface-400: 156 163 175;
+  --color-surface-500: 107 114 128;
+  --color-surface-600: 75 85 99;
+  --color-surface-700: 55 65 81;
+  --color-surface-800: 31 41 55;
+  --color-surface-900: 17 24 39;
+}
+
+fieldset {
+  @apply block;
+}
+
+/* Labels */
+label {
+  @apply block overflow-visible;
+}
+label span,
+legend {
+  @apply block text-surface-700 dark:text-surface-300 text-sm mb-2;
+}
+
+/* Inputs */
+[type="text"],
+[type="email"],
+[type="url"],
+[type="password"],
+[type="number"],
+[type="date"],
+[type="datetime-local"],
+[type="month"],
+[type="search"],
+[type="tel"],
+[type="time"],
+[type="week"],
+textarea,
+select {
+  @apply w-full text-black bg-surface-50 border-surface-300 rounded-lg shadow-sm focus:border-accent-500 focus:ring-accent-500;
+  @apply dark:text-white dark:bg-surface-600 dark:border-surface-500;
+}
+
+select[multiple] {
+  @apply rounded-md;
+}
+
+/* Selectable */
+[type="checkbox"],
+[type="radio"] {
+  @apply border-surface-500 rounded text-accent-600 focus:ring-accent-500;
+}
+
+/* Form groups */
+.form-group {
+  @apply mb-5 mt-5;
+}
+
+.invalid > input:not(:focus):not(:placeholder-shown) {
+  @apply bg-warning-300 border-warning-500;
+}
+
+.invalid > .form-error {
+  @apply text-warning-500;
+}
+
+/* Placeholders */
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  @apply text-surface-400;
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  @apply text-surface-400;
+}
+input::placeholder,
+textarea::placeholder {
+  @apply text-surface-400;
+}
+
+/* Accent Color - https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color */
+[type="range"]:not(.range-input) {
+  @apply w-full accent-accent-500;
+}
