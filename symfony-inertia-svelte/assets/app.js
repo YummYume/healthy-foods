@@ -3,8 +3,10 @@ import { InertiaProgress } from '@inertiajs/progress';
 
 import Layout from './src/Layout.svelte';
 
-import './theme.css';
-import './app.css';
+import './assets/css/theme.css';
+import './assets/css/app.css';
+
+InertiaProgress.init({ delay: 250 });
 
 createInertiaApp({
     resolve: name => {
@@ -14,6 +16,5 @@ createInertiaApp({
     },
     setup({ el, App, props }) {
         new App({ target: el, props });
-        InertiaProgress.init({ delay: 250 });
     },
 });

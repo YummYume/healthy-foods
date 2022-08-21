@@ -44,6 +44,7 @@
 <svelte:head>
     <title>{$title}</title>
     <meta name="description" content={$description} />
+    <link rel="shortcut icon" src="@assets/favicon.ico" type="image/x-icon" />
 </svelte:head>
 
 <div id="app-layout" class="min-h-screen w-full bg-gray-100 text-gray-700">

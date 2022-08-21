@@ -27,7 +27,7 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
-        "dev-server": "encore dev-server",
+        "dev-server": "encore dev-server --port 5000 --host 172.20.0.4",
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"

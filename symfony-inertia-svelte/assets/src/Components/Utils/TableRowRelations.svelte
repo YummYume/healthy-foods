@@ -8,13 +8,17 @@
     export let emptyMessage = "No result";
 </script>
 
-{#each entities as entity, index}
-    {@const lastIndex = entities.length - 1 !== index}
-    <span>
-        <Link class="text-indigo-400 hover:underline hover:text-indigo-800" href={`${routePrefix}${entity[id] ?? ""}`}
-            >{entity[name] ?? ""}</Link
-        >{lastIndex ? "," : ""}
-    </span>
+{#if Array.isArray(entities)}
+    {#each entities as entity, index}
+        {@const lastIndex = entities.length - 1 !== index}
+        <span>
+            <Link class="text-indigo-400 hover:underline hover:text-indigo-800" href={`${routePrefix}${entity[id] ?? ""}`}
+                >{entity[name] ?? ""}</Link
+            >{lastIndex ? "," : ""}
+        </span>
+    {:else}
+        <span>{emptyMessage}</span>
+    {/each}
 {:else}
     <span>{emptyMessage}</span>
-{/each}
+{/if}
