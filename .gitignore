@@ -64,4 +64,6 @@ nginx/logs/*
 .history
 .ionide
 
+yarn-error.log
+
 *.env.local

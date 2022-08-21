@@ -1,3 +1,4 @@
+import { Inertia } from "@inertiajs/inertia"; // This has to be here for Inertia to be imported in the app
 import { createInertiaApp } from '@inertiajs/inertia-svelte';
 import { InertiaProgress } from '@inertiajs/progress';
 import { register, init, getLocaleFromNavigator } from 'svelte-i18n';
@@ -31,9 +32,9 @@ InertiaProgress.init({ delay: 250, color: 'rgb(var(--color-primary-500))' });
 
 createInertiaApp({
     resolve: name => {
-        const page = require(`./src/Pages/${name}.svelte`);
-        page.layout = page.layout || Layout;
-        return page;
+        return resolvePageComponent(name, import.meta.glob('./src/Pages/**/*.svelte')).then((module) => {
+            return module.layout ? module : Object.assign({ layout: Layout }, module);
+        });
     },
     setup({ el, App, props }) {
         new App({ target: el, props });

@@ -4,14 +4,14 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		{% block stylesheets %}
-			{{ encore_entry_link_tags('app') }}
+			{{ vite_entry_link_tags('app') }}
 		{% endblock %}
 		{{ inertiaHead(page) }}
 	</head>
 	<body>
 		{{ inertia(page) }}
 		{% block javascripts %}
-			{{ encore_entry_script_tags('app') }}
+			{{ vite_entry_script_tags('app', { dependency: 'svelte' }) }}
 		{% endblock %}
 	</body>
 </html>
