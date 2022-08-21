@@ -1,4 +1,4 @@
-# Svelte & Inertia.js Demo (WEBPACK ENCORE VERSION)
+# Svelte & Inertia.js Demo (VITE VERSION)
 
 ## What is it
 
