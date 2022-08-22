@@ -7,6 +7,22 @@ import Layout from './src/Layout.svelte';
 
 import './assets/css/app.css';
 import './assets/css/theme.css';
+import './assets/css/app.css';
+
+/**
+ * Imports the given page component from the page record.
+ */
+function resolvePageComponent(name, pages) {
+    for (const path in pages) {
+        if (path.endsWith(`/Pages/${name}.svelte`)) {
+            return typeof pages[path] === 'function'
+                ? pages[path]()
+                : pages[path];
+        }
+    }
+
+    throw new Error(`Page not found: ${name}`);
+}
 
 const locales = [
     { locale: 'en', file: 'en' },

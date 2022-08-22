@@ -59,14 +59,11 @@ export default defineConfig(({ command }) => {
         },
         server: {
             port: 5173,
-            https: {
-                key: './dev-server/server.key',
-                cert: './dev-server/server.crt',
-            },
+            https: true,
             cors: true,
-            origin: 'https://172.20.0.4',
+            host: '172.20.0.4',
             strictPort: true,
-            hmr: false
+            hmr: true
         },
     }
 });
