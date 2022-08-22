@@ -13,15 +13,15 @@ The `symfony-inertia-svelte` folder contains the main app for this demo. It is b
 
 App should run on `localhost`.
 
-| Port  | Usage                     | Note                                    |
-| ----- | ------------------------- | --------------------------------------- |
-| :3000 | React Vite App            |                                         |
-| :4000 | Svelte Vite App           |                                         |
-| :443  | Symfony App               | Uses **https**                          |
-| :80   | Redirects to :443         |                                         |
-| :5000 | Webpack Encore dev server | Used for hot reloading (uses **https**) |
-| :8080 | PHPMyAdmin                |                                         |
-| :1080 | Mailcatcher               |                                         |
+| Port  | Usage                     | Note                                                                            |
+| ----- | ------------------------- | ------------------------------------------------------------------------------- |
+| :3000 | React Vite App            |                                                                                 |
+| :4000 | Svelte Vite App           |                                                                                 |
+| :443  | Symfony App               | Uses **https**                                                                  |
+| :80   | Redirects to :443         |                                                                                 |
+| :5000 | Webpack Encore dev server | Used for hot reloading (uses **https** and **172.20.0.4** as static IP address) |
+| :8080 | PHPMyAdmin                |                                                                                 |
+| :1080 | Mailcatcher               |                                                                                 |
 
 ## Commands (Makefile)
 
@@ -33,7 +33,6 @@ App should run on `localhost`.
 | rm                       | Removes stopped containers                                              |                                                       |
 | vendor                   | Installs vendor dependencies for the Symfony app                        |                                                       |
 | ssh                      | Use to sh into the Symfony App container                                | Container `app`                                       |
-| shh-react                | Use to sh into the React App container                                  | Container `react`                                     |
 | shh-react                | Use to sh into the React App container                                  | Container `react`                                     |
 | shh-svelte               | Use to sh into the Svelte App container                                 | Container `svelte`                                    |
 | db                       | Deletes (if it exist) the current db, then recreates it (with fixtures) |                                                       |
