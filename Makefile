@@ -95,3 +95,19 @@ sync-all:
 
 wait-for-db:
 	$(EXECAPP) php -r "set_time_limit(60);for(;;){if(@fsockopen(\"db\",3306)){break;}echo \"Waiting for DB\n\";sleep(1);}"
+
+# PRODUCTION
+update-prod:
+	cd symfony-inertia-svelte && \
+	composer require symfony/requirements-checker && \
+	composer install --no-dev --optimize-autoloader && \
+	php bin/console assets:install && \
+	yarn install --production --no-progress && \
+	yarn build && \
+	APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear && \
+	cd ../svelte && \
+	yarn install --production --no-progress && \
+	yarn build && \
+	cd ../svelte && \
+	yarn install --production --no-progress && \
+	yarn build
