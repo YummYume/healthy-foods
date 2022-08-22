@@ -17,7 +17,10 @@ export default defineConfig(({ command }) => {
                     prebundleSvelteLibraries: true
                 },
                 hot: isDev,
-                emitCss: !isDev
+                emitCss: !isDev,
+                compilerOptions: {
+                    dev: isDev
+                }
             }),
             mkcert(),
         ],
@@ -56,9 +59,12 @@ export default defineConfig(({ command }) => {
         },
         server: {
             port: 5173,
-            https: true,
+            https: {
+                key: './dev-server/server.key',
+                cert: './dev-server/server.crt',
+            },
             cors: true,
-            origin: 'https://localhost',
+            origin: 'https://172.20.0.4',
             strictPort: true,
             hmr: false
         },
