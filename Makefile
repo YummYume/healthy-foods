@@ -100,7 +100,7 @@ wait-for-db:
 update-prod:
 	cd symfony-inertia-svelte && \
 	composer require symfony/requirements-checker && \
-	composer install --no-dev --optimize-autoloader && \
+	APP_ENV=prod APP_DEBUG=0 composer install --no-dev --optimize-autoloader && \
 	php bin/console assets:install && \
 	yarn install --production --no-progress && \
 	yarn build && \
