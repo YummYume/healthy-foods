@@ -100,12 +100,12 @@ wait-for-db:
 update-prod:
 	cd symfony-inertia-svelte && \
 	composer require symfony/requirements-checker && \
-	APP_ENV=prod APP_DEBUG=0 composer install --no-dev --optimize-autoloader && \
+	composer install --no-dev --optimize-autoloader && \
 	php bin/console assets:install && \
 	yarn install --production --no-progress && \
 	yarn build && \
 	APP_ENV=prod APP_DEBUG=0 php bin/console cache:clear && \
-	cd ../svelte && \
+	cd ../react && \
 	yarn install --production --no-progress && \
 	yarn build && \
 	cd ../svelte && \
