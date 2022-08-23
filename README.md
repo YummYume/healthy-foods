@@ -1,5 +1,7 @@
 # Svelte & Inertia.js Demo (VITE VERSION)
 
+**Note** : If you experience certificate errors while using this version, you need to go to `https://172.20.0.4:5173/` and allow access from your browser.
+
 ## What is it
 
 Demo for Svelte and Inertia.js. Folders `react` and `svelte` both contain the same app (a simple form with errors) to showcase the differences between React and Svelte. Both apps are using Vite.
@@ -13,15 +15,15 @@ The `symfony-inertia-svelte` folder contains the main app for this demo. It is b
 
 App should run on `localhost`.
 
-| Port  | Usage                     | Note                                                                            |
-| ----- | ------------------------- | ------------------------------------------------------------------------------- |
-| :3000 | React Vite App            |                                                                                 |
-| :4000 | Svelte Vite App           |                                                                                 |
-| :443  | Symfony App               | Uses **https**                                                                  |
-| :80   | Redirects to :443         |                                                                                 |
-| :5000 | Webpack Encore dev server | Used for hot reloading (uses **https** and **172.20.0.4** as static IP address) |
-| :8080 | PHPMyAdmin                |                                                                                 |
-| :1080 | Mailcatcher               |                                                                                 |
+| Port  | Usage             | Note                                                                            |
+| ----- | ----------------- | ------------------------------------------------------------------------------- |
+| :3000 | React Vite App    |                                                                                 |
+| :4000 | Svelte Vite App   |                                                                                 |
+| :443  | Symfony App       | Uses **https**                                                                  |
+| :80   | Redirects to :443 |                                                                                 |
+| :5173 | Vite dev server   | Used for hot reloading (uses **https** and **172.20.0.4** as static IP address) |
+| :8080 | PHPMyAdmin        |                                                                                 |
+| :1080 | Mailcatcher       |                                                                                 |
 
 ## Commands (Makefile)
 
