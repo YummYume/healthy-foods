@@ -12,7 +12,7 @@ const SelectInput = ({ label, name, touched = false, choices, error = "", childr
             <label className="input-label" htmlFor={name}>
                 {label}
             </label>
-            <select {...props} name={name} className={`${isError ? "invalid" : ""} ${props.className ?? ""}`}>
+            <select {...props} name={name} id={name} className={`${isError ? "invalid" : ""} ${props.className ?? ""}`}>
                 <option value="" />
                 {choices.map((choice, index) => (
                     <option value={choice} key={choice + index}>

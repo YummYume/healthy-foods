@@ -51,7 +51,9 @@
     <header class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2" style="height: 5vh;">
         <!-- logo -->
         <div class="flex items-center space-x-2">
-            <button type="button" class="text-3xl" on:click={() => (menuOpen = !menuOpen)}><Icon src={AiOutlineMenu} /></button>
+            <button name="open-close-menu" type="button" class="text-3xl" on:click={() => (menuOpen = !menuOpen)}>
+                <Icon src={AiOutlineMenu} />
+            </button>
             <div>Menu</div>
         </div>
         <div>

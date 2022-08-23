@@ -12,7 +12,7 @@ const TextInput = ({ label, name, touched = true, type, error = "", children, ..
             <label className="input-label" htmlFor={name}>
                 {label}
             </label>
-            <input {...props} className={`${isError ? "invalid" : ""} ${props.className ?? ""}`} name={name} type={type} />
+            <input {...props} className={`${isError ? "invalid" : ""} ${props.className ?? ""}`} name={name} id={name} type={type} />
             <span className="input-error">{isError && error}</span>
             {children}
         </div>

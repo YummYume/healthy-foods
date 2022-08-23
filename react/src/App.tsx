@@ -39,13 +39,19 @@ function App() {
         if (target.name in newFormData) {
             const value = target.value;
 
-            newFormData = { ...newFormData, [target.name]: { ...newFormData[target.name], value, touched: true } };
+            newFormData = { ...newFormData, [target.name]: { ...newFormData[target.name], value } };
         }
 
         newFormData = handleErrors(newFormData);
 
         setFormData(newFormData);
         setIsError(Object.values(newFormData).some((d) => "" !== d.error));
+    };
+
+    const handleBlur = (event: React.FormEvent<HTMLInputElement | HTMLSelectElement>) => {
+        const target = event.target as HTMLInputElement;
+
+        setFormData({ ...formData, [target.name]: { ...formData[target.name], touched: true } });
     };
 
     const onSubmit = (event: React.SyntheticEvent) => {
@@ -69,6 +75,7 @@ function App() {
                     label="Nom d'utilisateur"
                     placeholder="Jean"
                     onChange={handleChange}
+                    onBlur={handleBlur}
                 />
                 <TextInput
                     name="email"
@@ -79,6 +86,7 @@ function App() {
                     label="Adresse email"
                     placeholder="jean@gmail.com"
                     onChange={handleChange}
+                    onBlur={handleBlur}
                 />
                 <TextInput
                     name="phoneNumber"
@@ -89,6 +97,7 @@ function App() {
                     label="Numéro de téléphone"
                     placeholder="0690805542"
                     onChange={handleChange}
+                    onBlur={handleBlur}
                 />
                 <TextInput
                     name="password"
@@ -98,6 +107,7 @@ function App() {
                     type="password"
                     label="Mot de passe"
                     onChange={handleChange}
+                    onBlur={handleBlur}
                 />
                 <SelectInput
                     name="city"
@@ -107,6 +117,7 @@ function App() {
                     label="Ville"
                     choices={cities}
                     onChange={handleChange}
+                    onBlur={handleBlur}
                 />
             </form>
             <button type="submit" form="form" className={`${isError ? "disabled" : ""}`} disabled={isError}>

@@ -5,8 +5,8 @@
 
     const choices: Array<string> = ["Compiègne", "Paris", "Amiens"];
 
-    $: isError = Object.values($accountData).some((d) => "" !== d.error);
     $: $accountData, accountData.handleErrors();
+    $: isError = Object.values($accountData).some((d) => "" !== d.error);
 
     function onSubmit(): void {
         if (!isError) {
@@ -26,7 +26,7 @@
             bind:value={$accountData.username.value}
             error={$accountData.username.error}
             touched={$accountData.username.touched}
-            on:change|once={() => accountData.setTouched("username")}
+            on:blur|once={() => accountData.setTouched("username")}
         />
         <TextInput
             name="email"
@@ -36,7 +36,7 @@
             bind:value={$accountData.email.value}
             error={$accountData.email.error}
             touched={$accountData.email.touched}
-            on:change|once={() => accountData.setTouched("email")}
+            on:blur|once={() => accountData.setTouched("email")}
         />
         <TextInput
             name="phoneNumber"
@@ -46,7 +46,7 @@
             bind:value={$accountData.phoneNumber.value}
             error={$accountData.phoneNumber.error}
             touched={$accountData.phoneNumber.touched}
-            on:change|once={() => accountData.setTouched("phoneNumber")}
+            on:blur|once={() => accountData.setTouched("phoneNumber")}
         />
         <TextInput
             name="password"
@@ -55,7 +55,7 @@
             bind:value={$accountData.password.value}
             error={$accountData.password.error}
             touched={$accountData.password.touched}
-            on:change|once={() => accountData.setTouched("password")}
+            on:blur|once={() => accountData.setTouched("password")}
         />
         <SelectInput
             name="city"
@@ -85,7 +85,8 @@
         flex-direction: column;
         padding: 25px;
         box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2);
-        min-width: 320px;
+        width: 80vw;
+        max-width: 300px;
     }
 
     form {

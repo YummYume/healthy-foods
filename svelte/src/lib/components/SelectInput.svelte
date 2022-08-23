@@ -15,7 +15,7 @@
             {label}
         </slot>
     </label>
-    <select {...$$restProps} class:invalid={isError} bind:value {name} on:change>
+    <select {...$$restProps} class:invalid={isError} bind:value {name} id={name} on:change on:change>
         <slot name="select">
             <option value="" />
             {#each choices as choice}

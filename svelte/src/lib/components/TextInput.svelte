@@ -19,7 +19,7 @@
             {label}
         </slot>
     </label>
-    <input use:typeAction {...$$restProps} class:invalid={isError} bind:value {name} on:change on:input />
+    <input use:typeAction {...$$restProps} class:invalid={isError} bind:value {name} id={name} on:input on:blur />
     <span class="input-error">
         <slot name="error" {isError}>
             {#if isError}
