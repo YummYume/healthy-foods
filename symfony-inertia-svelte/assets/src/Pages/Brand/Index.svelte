@@ -17,7 +17,7 @@
                 headers: { "X-CSRF-Token": brand.csrfToken },
                 preserveState: true,
                 preservescroll: true,
-                only: ["categories", "flashMessages"]
+                only: ["brands", "flashMessages"]
             });
         }
     }
