@@ -1,6 +1,6 @@
 # Svelte & Inertia.js Demo (VITE VERSION)
 
-**Note** : If you experience certificate errors while using this version, you need to go to `https://172.20.0.4:5173/` and allow access from your browser.
+**Note** : If you experience certificate errors while using this version, you need to go to `https://172.20.0.4:5173/` and allow access from your browser...
 
 ## What is it
 
