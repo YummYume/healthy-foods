@@ -56,7 +56,7 @@
                 type="button"
                 class="text-3xl"
                 on:click={() => (menuOpen = !menuOpen)}
-                aria-labelledby={menuOpen ? "Close the side menu" : "Open the side menu"}
+                aria-label={menuOpen ? "Close the side menu" : "Open the side menu"}
             >
                 <Icon src={AiOutlineMenu} />
             </button>
