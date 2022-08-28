@@ -1,11 +1,20 @@
 <script>
-    import { Link } from "@inertiajs/inertia-svelte";
     import { Inertia } from "@inertiajs/inertia";
+    import { Button, GradientHeading } from "@brainandbones/skeleton";
+    import Icon from "svelte-icons-pack/Icon.svelte";
+    import AiOutlinePlus from "svelte-icons-pack/ai/AiOutlinePlus";
+    import AiFillDelete from "svelte-icons-pack/ai/AiFillDelete";
+    import AiFillEdit from "svelte-icons-pack/ai/AiFillEdit";
+    import { Datatable } from "svelte-simple-datatables";
 
     import TableRowRelations from "../../Components/Utils/TableRowRelations.svelte";
     import { title } from "@stores/seo";
 
     export let categories;
+
+    const settings = { sortable: true, pagination: true, scrollY: true, rowsPerPage: 50, columnFilter: true, css: false };
+
+    let rows;
 
     title.set(`Category list`);
 
@@ -23,53 +32,76 @@
     }
 </script>
 
-<h2 class="w-full text-center mb-10 text-4xl">Category list</h2>
+<GradientHeading
+    class="w-full text-center mb-10 text-4xl"
+    tag="h2"
+    direction="bg-gradient-to-b"
+    from="from-warning-300"
+    to="to-primary-600"
+>
+    Category list
+</GradientHeading>
 
-{#if categories.length}
-    <span class="block my-10 text-2xl">{categories.length} {categories.length > 1 ? "categories" : "category"} found.</span>
-
-    <div class="overflow-auto shadow ring-1 ring-black ring-opacity-5 md:rounded-lg my-3">
-        <table class="min-w-full divide-y divide-gray-300 table-auto">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Name</th>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Foods</th>
-                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">Actions</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200 bg-white">
-                {#each categories as category}
+<div class="datatable-container">
+    <Datatable {settings} data={categories} bind:dataRows={rows}>
+        <thead>
+            <th data-key="name">Name</th>
+            <th data-key="(row) => Array.isArray(row?.foods) ? row.foods.map(f => f.name).join(' ') : 'No food'">Foods</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            {#if rows}
+                {#each $rows as row}
                     <tr>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm">{category.name}</td>
+                        <td class="whitespace-nowrap px-3 py-4 text-sm">{row.name}</td>
                         <td class="whitespace-nowrap px-3 py-4 text-sm">
-                            <TableRowRelations entities={category.foods} routePrefix="/food/edit/" emptyMessage="No food" />
+                            <TableRowRelations entities={row.foods} routePrefix="/food/edit/" emptyMessage="No food" />
                         </td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm">
-                            <Link
-                                class="bg-blue-600 px-5 py-3 mr-1 text-sm shadow-sm font-medium tracking-wider  text-blue-100 rounded-full hover:shadow-2xl hover:bg-blue-700"
-                                href={`/category/edit/${category.id}`}
+                        <td>
+                            <Button
+                                size="sm"
+                                background="bg-accent-600"
+                                color="text-surface-200"
+                                ring="ring-transparent"
+                                weight="ring-none"
+                                rounded="rounded-lg"
+                                width="w-auto"
+                                on:click={() => Inertia.visit(`/category/edit/${row.id}`)}
                             >
-                                Edit
-                            </Link>
-                            <button
-                                on:click={() => deleteCategory(category)}
-                                class="bg-red-500 px-5 py-3 ml-1 text-sm shadow-sm font-medium tracking-wider  text-red-100 rounded-full hover:shadow-2xl hover:bg-red-600"
+                                <span slot="lead" class="fill-surface-200"><Icon src={AiFillEdit} /></span>
+                                <span>Edit</span>
+                            </Button>
+                            <Button
+                                size="sm"
+                                background="bg-warning-600"
+                                color="text-surface-200"
+                                ring="ring-transparent"
+                                weight="ring-none"
+                                rounded="rounded-lg"
+                                width="w-auto"
+                                on:click={() => deleteCategory(row)}
                             >
-                                Delete
-                            </button>
+                                <span slot="lead" class="fill-surface-200"><Icon src={AiFillDelete} /></span>
+                                <span>Delete</span>
+                            </Button>
                         </td>
                     </tr>
                 {/each}
-            </tbody>
-        </table>
-    </div>
-{:else}
-    <span class="block my-10 text-2xl">No category found.</span>
-{/if}
+            {/if}
+        </tbody>
+    </Datatable>
+</div>
 
-<Link
-    class="w-auto inline-block bg-green-600 px-5 py-3 my-3 text-sm shadow-sm font-medium tracking-wider  text-green-100 rounded-full hover:shadow-2xl hover:bg-green-700"
-    href="/category/add"
+<Button
+    size="base"
+    background="bg-primary-800"
+    color="text-surface-200"
+    ring="ring-transparent"
+    weight="ring-none"
+    rounded="rounded-full"
+    width="w-auto"
+    on:click={() => Inertia.visit("/category/add")}
 >
-    Add a category
-</Link>
+    <span slot="lead" class="fill-surface-200"><Icon src={AiOutlinePlus} /></span>
+    <span>Add a category</span>
+</Button>

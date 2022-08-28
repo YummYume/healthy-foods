@@ -1,7 +1,6 @@
 <script>
     import { page } from "@inertiajs/inertia-svelte";
     import { SvelteToast, toast } from "@zerodevx/svelte-toast";
-    import { fly } from "svelte/transition";
     import { Link } from "@inertiajs/inertia-svelte";
     import Icon from "svelte-icons-pack/Icon.svelte";
     import AiOutlineMenu from "svelte-icons-pack/ai/AiOutlineMenu";
@@ -9,8 +8,13 @@
     import AiFillHome from "svelte-icons-pack/ai/AiFillHome";
     import AiOutlineUnorderedList from "svelte-icons-pack/ai/AiOutlineUnorderedList";
     import FaBrandsApple from "svelte-icons-pack/fa/FaBrandsApple";
+    import { LightSwitch } from "@brainandbones/skeleton";
+    import { Drawer } from "@brainandbones/skeleton";
+    import { GradientHeading } from "@brainandbones/skeleton";
+    import CgClose from "svelte-icons-pack/cg/CgClose";
 
     import { title, description } from "./stores/seo";
+    import { drawer } from "./stores/drawer";
 
     const menuItems = [
         { label: "Home", path: "/", prefix: "index", icon: AiFillHome },
@@ -18,8 +22,6 @@
         { label: "Categories", path: "/category", prefix: "category_", icon: AiOutlineUnorderedList },
         { label: "Brands", path: "/brand", prefix: "brand_", icon: FaBrandsApple }
     ];
-
-    let menuOpen = true;
 
     $: route = $page.props.route;
     $: displayFlashMessages($page.props.flashMessages);
@@ -47,51 +49,59 @@
     <link rel="shortcut icon" src="@assets/favicon.ico" type="image/x-icon" />
 </svelte:head>
 
-<div id="app-layout" class="min-h-screen w-full bg-gray-100 text-gray-700">
-    <header class="flex w-full items-center justify-between border-b-2 border-gray-200 bg-white p-2" style="height: 5vh;">
-        <!-- logo -->
-        <div class="flex items-center space-x-2">
-            <button
-                name="open-close-menu"
-                type="button"
-                class="text-3xl"
-                on:click={() => (menuOpen = !menuOpen)}
-                aria-label={menuOpen ? "Close the side menu" : "Open the side menu"}
-            >
-                <Icon src={AiOutlineMenu} />
-            </button>
-            <div>Menu</div>
-        </div>
-        <div>
-            <h1>{$title}</h1>
-        </div>
-    </header>
-    <div class="flex relative">
-        {#if menuOpen}
-            <aside
-                transition:fly|local={{ x: -250 }}
-                class="flex flex-col space-y-2 border-r-2 border-gray-200 bg-white p-2 w-full absolute md:static md:w-72"
-                style="min-height: 95vh"
-            >
+<div id="app-layout" class="min-h-screen w-full bg-surface-100 dark:bg-surface-800 text-surface-700 dark:text-surface-300">
+    <div class="flex">
+        <Drawer visible={drawer} fixed="left">
+            <div slot="header" class="relative">
+                <GradientHeading
+                    class="w-full text-center text-4xl p-4"
+                    tag="h3"
+                    direction="bg-gradient-to-b"
+                    from="from-accent-500"
+                    to="to-primary-500"
+                >
+                    Healthy food
+                </GradientHeading>
+                <div class="absolute top-2 right-2 fill-surface-200 lg:hidden" on:click={drawer.drawerClose}>
+                    <Icon src={CgClose} size="1rem" />
+                </div>
+            </div>
+            <div class="p-2" slot="main">
                 {#each menuItems as menuItem}
+                    {@const selected = route?.startsWith(menuItem.prefix)}
                     <Link
-                        class={`flex items-center space-x-1 rounded-md px-2 py-3 ${
-                            route?.startsWith(menuItem.prefix) ? "bg-gray-100 text-blue-600" : "hover:bg-gray-100 hover:text-blue-600"
+                        class={`flex items-center space-x-1 rounded-md px-2 py-3 my-2 ${
+                            selected
+                                ? "bg-surface-300 text-primary-600 fill-primary-600"
+                                : "dark:text-primary-200 dark:fill-primary-200 hover:bg-surface-300 hover:text-primary-600 dark:hover:text-primary-600 hover:fill-primary-600 dark:hover:fill-primary-600"
                         }`}
                         href={menuItem.path}
                     >
-                        <Icon src={menuItem.icon} size="1.2em" />
+                        <Icon src={menuItem.icon} size="1.1em" />
                         <span>{menuItem.label}</span>
                     </Link>
                 {/each}
-            </aside>
-        {/if}
-        <main class="w-full p-4">
-            <slot />
-            <div class="wrap">
-                <SvelteToast options={{ pausable: true, theme: { "--toastBarBackground": "white" } }} />
             </div>
-        </main>
+            <div slot="footer" class="flex align-middle gap-6 p-5">
+                <LightSwitch />
+            </div>
+        </Drawer>
+        <div class="w-screen min-h-screen">
+            <div class="flex relative">
+                <main class="w-full min-h-screen p-4">
+                    <slot />
+                    <div class="wrap">
+                        <SvelteToast options={{ pausable: true, theme: { "--toastBarBackground": "rgb(var(--color-surface-200))" } }} />
+                    </div>
+                </main>
+            </div>
+            <div
+                on:click={drawer.drawerOpen}
+                class="fixed bottom-5 right-5 bg-primary-700 rounded-full p-3 opacity-75 fill-surface-200 lg:hidden"
+            >
+                <Icon src={AiOutlineMenu} size="1.8rem" />
+            </div>
+        </div>
     </div>
 </div>
 
@@ -103,16 +113,22 @@
         --toastContainerBottom: 2rem;
         --toastContainerLeft: auto;
     }
+    @media screen and (max-width: 640px) {
+        .wrap {
+            --toastContainerRight: 1rem;
+        }
+    }
+
     :global(.info) {
-        --toastBackground: cyan;
+        --toastBackground: rgb(var(--color-primary-400));
     }
     :global(.warn) {
-        --toastBackground: yellow;
+        --toastBackground: rgb(var(--color-warning-200));
     }
     :global(.success) {
-        --toastBackground: green;
+        --toastBackground: rgb(var(--color-accent-800));
     }
     :global(.error) {
-        --toastBackground: red;
+        --toastBackground: rgb(var(--color-warning-800));
     }
 </style>

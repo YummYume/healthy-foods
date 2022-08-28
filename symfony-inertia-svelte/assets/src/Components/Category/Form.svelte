@@ -1,4 +1,8 @@
 <script>
+    import { Button } from "@brainandbones/skeleton";
+    import Icon from "svelte-icons-pack/Icon.svelte";
+    import AiOutlineCheck from "svelte-icons-pack/ai/AiOutlineCheck";
+
     import FormError from "@app/Components/Utils/FormError.svelte";
 
     export let form;
@@ -17,11 +21,19 @@
             <FormError errors={$form.errors.category} />
         </div>
     {/if}
-    <button
-        class="mt-2 bg-purple-600 px-5 py-3 text-sm shadow-sm font-medium tracking-wider  text-purple-100 rounded-full hover:shadow-2xl hover:bg-purple-700 disabled:opacity-50"
+    <Button
+        size="base"
+        background="bg-accent-800"
+        color="text-surface-200"
+        ring="ring-transparent"
+        weight="ring-none"
+        rounded="rounded-full"
+        width="w-auto"
         type="submit"
+        class="mt-2"
         disabled={$form.processing}
     >
-        Submit
-    </button>
+        <span slot="lead" class="fill-surface-200"><Icon src={AiOutlineCheck} /></span>
+        <span>Save</span>
+    </Button>
 </form>

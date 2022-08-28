@@ -28,6 +28,12 @@ Encore
             },
         },
     })
+    .addRule({
+        test: /@brainandbones\/[a-zA-Z0-9/]{1,}\.js/,
+        resolve: {
+            fullySpecified: false
+        }
+    })
     .addAliases({
         '@app': path.resolve('assets/src'),
         '@stores': path.resolve('assets/src/stores'),

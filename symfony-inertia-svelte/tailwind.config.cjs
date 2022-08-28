@@ -9,6 +9,7 @@ module.exports = {
     theme: {
         extend: {},
     },
+    darkMode: 'class',
     plugins: [
         require('@tailwindcss/forms'),
         require('@brainandbones/skeleton/tailwind.cjs')

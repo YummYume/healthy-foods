@@ -11,28 +11,28 @@
   --color-primary-700: 109 40 217;
   --color-primary-800: 91 33 182;
   --color-primary-900: 76 29 149;
-  /* accent (rose) */
-  --color-accent-50: 255 241 242;
-  --color-accent-100: 255 228 230;
-  --color-accent-200: 254 205 211;
-  --color-accent-300: 253 164 175;
-  --color-accent-400: 251 113 133;
-  --color-accent-500: 244 63 94;
-  --color-accent-600: 225 29 72;
-  --color-accent-700: 190 18 60;
-  --color-accent-800: 159 18 57;
-  --color-accent-900: 136 19 55;
-  /* warning (orange) */
-  --color-warning-50: 255 247 237;
-  --color-warning-100: 255 237 213;
-  --color-warning-200: 254 215 170;
-  --color-warning-300: 253 186 116;
-  --color-warning-400: 251 146 60;
-  --color-warning-500: 249 115 22;
-  --color-warning-600: 234 88 12;
-  --color-warning-700: 194 65 12;
-  --color-warning-800: 154 52 18;
-  --color-warning-900: 124 45 18;
+  /* accent (emerald) */
+  --color-accent-50: 236 253 245;
+  --color-accent-100: 209 250 229;
+  --color-accent-200: 167 243 208;
+  --color-accent-300: 110 231 183;
+  --color-accent-400: 52 211 153;
+  --color-accent-500: 16 185 129;
+  --color-accent-600: 5 150 105;
+  --color-accent-700: 4 120 87;
+  --color-accent-800: 6 95 70;
+  --color-accent-900: 6 78 59;
+  /* warning (rose) */
+  --color-warning-50: 255 241 242;
+  --color-warning-100: 255 228 230;
+  --color-warning-200: 254 205 211;
+  --color-warning-300: 253 164 175;
+  --color-warning-400: 251 113 133;
+  --color-warning-500: 244 63 94;
+  --color-warning-600: 225 29 72;
+  --color-warning-700: 190 18 60;
+  --color-warning-800: 159 18 57;
+  --color-warning-900: 136 19 55;
   /* surface (gray) */
   --color-surface-50: 249 250 251;
   --color-surface-100: 243 244 246;
@@ -74,8 +74,23 @@ legend {
 [type="week"],
 textarea,
 select {
-  @apply w-full text-black bg-surface-50 border-surface-300 rounded-lg shadow-sm focus:border-accent-500 focus:ring-accent-500;
-  @apply dark:!text-white dark:!bg-surface-600 dark:!border-surface-500;
+  @apply w-full bg-surface-50 dark:bg-surface-600 border-surface-300 dark:border-surface-500 rounded-lg shadow-sm focus:border-accent-500 focus:ring-accent-500;
+}
+.dark [type="text"],
+[type="email"],
+[type="url"],
+[type="password"],
+[type="number"],
+[type="date"],
+[type="datetime-local"],
+[type="month"],
+[type="search"],
+[type="tel"],
+[type="time"],
+[type="week"],
+textarea,
+select {
+  @apply bg-surface-600 border-surface-500;
 }
 
 select[multiple] {
@@ -118,4 +133,172 @@ textarea::placeholder {
 /* Accent Color - https://developer.mozilla.org/en-US/docs/Web/CSS/accent-color */
 [type="range"]:not(.range-input) {
   @apply w-full accent-accent-500;
+}
+
+/* Datatables */
+.datatable-container {
+  @apply my-6 mx-2;
+  min-height: 500px;
+}
+
+.datatable {
+  @apply bg-surface-200 rounded-t-lg;
+}
+.dark .datatable {
+  @apply bg-surface-600;
+}
+.datatable table {
+  @apply !-mt-7;
+}
+
+.datatable .dt-search {
+  @apply ml-4 py-2 mb-0.5;
+}
+.datatable .dt-search input {
+  @apply border border-solid border-surface-600 bg-surface-200 rounded-md outline-none p-2 leading-6 m-0 h-6 w-44 transition-all;
+}
+.dark .datatable .dt-search input {
+  @apply border-surface-200 bg-surface-600;
+}
+.datatable .dt-search input:focus {
+  @apply border-2 border-solid border-surface-200;
+}
+.datatable .dt-search input::placeholder {
+  @apply text-surface-700 leading-6;
+}
+.dark .datatable .dt-search input::placeholder {
+  @apply text-surface-300;
+}
+
+.datatable thead:not([style*="hidden"]) th {
+  @apply py-2 pr-4 border-solid border-b border-b-surface-200 text-center bg-surface-200;
+}
+.dark .datatable thead:not([style*="hidden"]) th {
+  @apply bg-surface-600;
+}
+.datatable .dt-table th.sortable {
+  @apply cursor-pointer;
+}
+.datatable .dt-table th.sortable span {
+  @apply pr-4 relative;
+}
+.datatable .dt-table th.sortable span:before,
+.datatable .dt-table th.sortable span:after {
+  @apply border-4 border-solid border-transparent block h-0 top-2/4 right-0 absolute w-0;
+  content: "";
+}
+.datatable .dt-table th.sortable span:before {
+  @apply border-b-surface-200 -mt-2;
+}
+.datatable .dt-table th.sortable span:after {
+  @apply border-t-surface-200 mt-0.5;
+}
+.datatable .dt-table th.sortable.asc:not(.desc) span:before {
+  @apply border-none border-b-surface-200;
+}
+.datatable .dt-table th.sortable.desc:not(.asc) span:after {
+  @apply border-none border-t-surface-200;
+}
+.datatable .dt-table th.filter {
+  @apply p-0 m-0 border border-solid border-surface-600;
+  background-image: none;
+}
+.dark .datatable .dt-table th.filter {
+  @apply border-surface-200;
+}
+.datatable .dt-table th.filter input {
+  @apply bg-transparent border-solid border-b border-b-surface-600 text-center outline-none rounded-none text-sm h-full;
+}
+.dark .datatable .dt-table th.filter input {
+  @apply border-b-surface-200;
+}
+.datatable .dt-table th.filter input::placeholder {
+  @apply text-surface-700 italic text-xs;
+}
+.dark .datatable .dt-table th.filter input::placeholder {
+  @apply text-surface-300;
+}
+
+.datatable .dt-table {
+  @apply border-b border-solid border-b-surface-600;
+  scrollbar-width: thin;
+}
+.dark .datatable .dt-table {
+  @apply border-b-surface-200;
+}
+.datatable .dt-table::-webkit-scrollbar {
+  @apply w-1.5 h-1.5;
+}
+.datatable .dt-table::-webkit-scrollbar-track {
+  @apply bg-surface-200;
+}
+.dark .datatable .dt-table::-webkit-scrollbar-track {
+  @apply bg-surface-600;
+}
+.datatable .dt-table::-webkit-scrollbar-thumb {
+  @apply bg-surface-400;
+}
+.datatable .dt-table::-webkit-scrollbar-thumb:hover {
+  @apply bg-surface-400;
+}
+.datatable .dt-table::-webkit-scrollbar-track-piece:start {
+  @apply top-10;
+}
+.datatable .dt-table table {
+  @apply w-full border-collapse overflow-hidden mb-1.5;
+}
+
+.datatable .dt-pagination {
+  @apply px-2 py-6 bg-surface-200 rounded-b-lg;
+}
+.dark .datatable .dt-pagination {
+  @apply bg-surface-600;
+}
+
+.datatable .dt-pagination-buttons {
+  @apply h-8 mr-4;
+}
+.datatable .dt-pagination-buttons button {
+  @apply bg-transparent h-8 w-8 text-sm m-0 p-0 transition-all leading-8 duration-200 border-r-0 outline-none text-surface-700 border-solid border border-surface-600;
+}
+.dark .datatable .dt-pagination-buttons button {
+  @apply text-surface-300 border-surface-200;
+}
+.datatable .dt-pagination-buttons button:first-child {
+  @apply border-r-0 rounded-l-md;
+}
+.datatable .dt-pagination-buttons button:last-child {
+  @apply border-l border-r border-r-surface-600 rounded-r-md;
+}
+.dark .datatable .dt-pagination-buttons button:last-child {
+  @apply border-r-surface-200;
+}
+.datatable .dt-pagination-buttons button:not(.active):hover {
+  @apply bg-transparent cursor-pointer;
+}
+.datatable .dt-pagination-buttons button.text {
+  @apply w-auto cursor-pointer;
+  min-width: 70px;
+}
+.datatable .dt-pagination-buttons button.ellipse:hover {
+  @apply bg-inherit cursor-default;
+}
+.datatable .dt-pagination-buttons button.active {
+  @apply bg-transparent font-bold;
+}
+.datatable .dt-pagination-buttons button.disabled:hover {
+  @apply bg-inherit cursor-default;
+}
+.datatable .dt-pagination-buttons.mobile button.disabled {
+  @apply text-surface-400;
+}
+.datatable .dt-pagination-buttons.mobile button {
+  @apply font-bold;
+}
+
+.datatable .dt-pagination-rowcount {
+  @apply leading-8 mr-4 text-sm text-surface-700;
+}
+.dark .datatable .dt-pagination-rowcount {
+  @apply text-surface-300;
 }
