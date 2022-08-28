@@ -7,7 +7,6 @@ import Layout from './src/Layout.svelte';
 
 import './assets/css/app.css';
 import './assets/css/theme.css';
-import './assets/css/app.css';
 
 /**
  * Imports the given page component from the page record.
