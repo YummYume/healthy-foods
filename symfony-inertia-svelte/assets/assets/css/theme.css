@@ -60,6 +60,7 @@ legend {
 }
 
 /* Inputs */
+
 [type="text"],
 [type="email"],
 [type="url"],
@@ -74,23 +75,85 @@ legend {
 [type="week"],
 textarea,
 select {
-  @apply w-full bg-surface-50 dark:bg-surface-600 border-surface-300 dark:border-surface-500 rounded-lg shadow-sm focus:border-accent-500 focus:ring-accent-500;
+  @apply px-4 py-3 w-full bg-surface-50 dark:bg-surface-600 border-surface-300 dark:border-surface-500 rounded-lg shadow-sm focus:border-accent-500 focus:ring-accent-500;
 }
-.dark [type="text"],
-[type="email"],
-[type="url"],
-[type="password"],
-[type="number"],
-[type="date"],
-[type="datetime-local"],
-[type="month"],
-[type="search"],
-[type="tel"],
-[type="time"],
-[type="week"],
-textarea,
-select {
+.dark
+  ([type="text"],
+  [type="email"],
+  [type="url"],
+  [type="password"],
+  [type="number"],
+  [type="date"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="week"],
+  textarea,
+  select) {
   @apply bg-surface-600 border-surface-500;
+}
+
+.form-group > .selectContainer {
+  @apply shadow-sm w-full;
+  --background: rgb(var(--color-surface-50));
+  --border: 1px solid rgb(var(--color-surface-300) / 1);
+  --borderFocusColor: rgb(var(--color-accent-500));
+  --borderHoverColor: rgb(var(--color-surface-300) / 1);
+  --borderRadius: 0.5rem;
+  --height: 50px;
+  --inputPadding: 0.75rem 1rem;
+  --inputFontSize: 1rem;
+  --inputColor: rgb(var(--color-surface-700));
+  --itemColor: rgb(var(--color-surface-700));
+  --itemHoverBG: rgb(var(--color-surface-300));
+  --itemIsActiveBG: rgb(var(--color-accent-700));
+  --itemIsActiveColor: rgb(var(--color-surface-50));
+  --placeholderColor: rgb(var(--color-surface-700));
+  --itemHoverColor: rgb(var(--color-accent-700));
+  --listBackground: rgb(var(--color-surface-50));
+  --listBorder: 1px solid rgb(var(--color-surface-300) / 1);
+  --listBorderRadius: 0.5rem;
+  --listEmptyColor: rgb(var(--color-surface-700));
+  --multiSelectPadding: 0.5rem 1rem;
+  --multiItemMargin: 0 0.5rem 0 0;
+  --multiItemActiveBG: rgb(var(--color-surface-700));
+  --multiItemActiveColor: rgb(var(--color-surface-300));
+  --multiItemBG: rgb(var(--color-surface-300));
+  --multiClearBG: rgb(var(--color-surface-500));
+  --multiClearFill: rgb(var(--color-surface-300));
+  --multiClearHoverBG: rgb(var(--color-surface-300));
+  --multiClearHoverFill: rgb(var(--color-surface-700));
+  --clearSelectColor: rgb(var(--color-surface-700));
+  --clearSelectFocusColor: rgb(var(--color-surface-600));
+  --clearSelectHoverColor: rgb(var(--color-surface-600));
+}
+.dark .form-group > .selectContainer {
+  --background: rgb(var(--color-surface-600));
+  --border: 1px solid rgb(var(--color-surface-500) / 1);
+  --borderFocusColor: rgb(var(--color-accent-500));
+  --borderHoverColor: rgb(var(--color-surface-500) / 1);
+  --inputColor: rgb(var(--color-surface-300));
+  --itemColor: rgb(var(--color-surface-300));
+  --itemHoverBG: rgb(var(--color-surface-700));
+  --itemIsActiveBG: rgb(var(--color-accent-500));
+  --itemIsActiveColor: rgb(var(--color-surface-200));
+  --placeholderColor: rgb(var(--color-surface-300));
+  --itemHoverColor: rgb(var(--color-accent-300));
+  --listBackground: rgb(var(--color-surface-500));
+  --listBorder: 1px solid rgb(var(--color-surface-700) / 1);
+  --listEmptyColor: rgb(var(--color-surface-300));
+  --multiItemActiveBG: rgb(var(--color-surface-300));
+  --multiItemActiveColor: rgb(var(--color-surface-700));
+  --multiItemBG: rgb(var(--color-surface-700));
+  --multiClearBG: rgb(var(--color-surface-500));
+  --multiClearFill: rgb(var(--color-surface-700));
+  --multiClearHoverBG: rgb(var(--color-surface-700));
+  --multiClearHoverFill: rgb(var(--color-surface-300));
+  --clearSelectColor: rgb(var(--color-surface-200));
+  --clearSelectFocusColor: rgb(var(--color-surface-300));
+  --clearSelectHoverColor: rgb(var(--color-surface-300));
 }
 
 select[multiple] {
@@ -109,7 +172,7 @@ select[multiple] {
 }
 
 .invalid > input:not(:focus):not(:placeholder-shown) {
-  @apply bg-warning-300 border-warning-500;
+  @apply bg-warning-300 dark:bg-warning-400 border-warning-500 dark:bg-warning-600;
 }
 
 .invalid > .form-error {

@@ -6,6 +6,7 @@
     import AiFillDelete from "svelte-icons-pack/ai/AiFillDelete";
     import AiFillEdit from "svelte-icons-pack/ai/AiFillEdit";
     import { Datatable } from "svelte-simple-datatables";
+    import { dialogStore } from "@brainandbones/skeleton";
 
     import TableRowRelations from "../../Components/Utils/TableRowRelations.svelte";
     import { title } from "@stores/seo";
@@ -19,16 +20,21 @@
     title.set(`Category list`);
 
     function deleteCategory(category) {
-        const willDelete = confirm(`Are you sure you want to delete "${category.name}"?`);
-
-        if (willDelete) {
-            Inertia.delete(`/category/delete/${category.id}`, {
-                headers: { "X-CSRF-Token": category.csrfToken },
-                preserveState: true,
-                preservescroll: true,
-                only: ["categories", "flashMessages"]
-            });
-        }
+        dialogStore.trigger({
+            type: "confirm",
+            title: "Please Confirm",
+            body: `Are you sure you want to delete "${category.name}"?`,
+            result: (willDelete) => {
+                if (willDelete) {
+                    Inertia.delete(`/category/delete/${category.id}`, {
+                        headers: { "X-CSRF-Token": category.csrfToken },
+                        preserveState: true,
+                        preservescroll: true,
+                        only: ["categories", "flashMessages"]
+                    });
+                }
+            }
+        });
     }
 </script>
 
@@ -66,6 +72,7 @@
                                 weight="ring-none"
                                 rounded="rounded-lg"
                                 width="w-auto"
+                                class="my-1 ml-1"
                                 on:click={() => Inertia.visit(`/category/edit/${row.id}`)}
                             >
                                 <span slot="lead" class="fill-surface-200"><Icon src={AiFillEdit} /></span>
@@ -79,6 +86,7 @@
                                 weight="ring-none"
                                 rounded="rounded-lg"
                                 width="w-auto"
+                                class="my-1 ml-1"
                                 on:click={() => deleteCategory(row)}
                             >
                                 <span slot="lead" class="fill-surface-200"><Icon src={AiFillDelete} /></span>

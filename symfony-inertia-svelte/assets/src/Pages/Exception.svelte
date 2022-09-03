@@ -1,4 +1,9 @@
 <script>
+    import { Inertia } from "@inertiajs/inertia";
+    import { Button, GradientHeading } from "@brainandbones/skeleton";
+    import Icon from "svelte-icons-pack/Icon.svelte";
+    import AiFillHome from "svelte-icons-pack/ai/AiFillHome";
+
     import { title, description } from "@stores/seo";
 
     export let status;
@@ -21,7 +26,28 @@
     $: description.set(exceptionDescription);
 </script>
 
-<div>
-    <h2 class="w-full text-center mb-10 text-4xl">{exceptionTitle}</h2>
-    <p class="text-lg tracking-wide leading-7 my-3">{exceptionDescription}</p>
-</div>
+<GradientHeading
+    class="w-full text-center mb-10 text-4xl"
+    tag="h2"
+    direction="bg-gradient-to-b"
+    from="from-warning-300"
+    to="to-primary-600"
+>
+    {exceptionTitle}
+</GradientHeading>
+
+<p class="text-lg tracking-wide leading-7 my-10">{exceptionDescription}</p>
+
+<Button
+    size="base"
+    background="bg-primary-800"
+    color="text-surface-200"
+    ring="ring-transparent"
+    weight="ring-none"
+    rounded="rounded-full"
+    width="w-auto"
+    on:click={() => Inertia.visit("/")}
+>
+    <span slot="lead" class="fill-surface-200"><Icon src={AiFillHome} /></span>
+    <span>Go to home page</span>
+</Button>

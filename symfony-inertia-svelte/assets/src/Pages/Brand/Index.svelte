@@ -6,6 +6,7 @@
     import AiFillDelete from "svelte-icons-pack/ai/AiFillDelete";
     import AiFillEdit from "svelte-icons-pack/ai/AiFillEdit";
     import { Datatable } from "svelte-simple-datatables";
+    import { dialogStore } from "@brainandbones/skeleton";
 
     import TableRowRelations from "../../Components/Utils/TableRowRelations.svelte";
     import { title } from "@stores/seo";
@@ -19,16 +20,21 @@
     title.set(`Brand list`);
 
     function deleteBrand(brand) {
-        const willDelete = confirm(`Are you sure you want to delete "${brand.name}"?`);
-
-        if (willDelete) {
-            Inertia.delete(`/brand/delete/${brand.id}`, {
-                headers: { "X-CSRF-Token": brand.csrfToken },
-                preserveState: true,
-                preservescroll: true,
-                only: ["brands", "flashMessages"]
-            });
-        }
+        dialogStore.trigger({
+            type: "confirm",
+            title: "Please Confirm",
+            body: `Are you sure you want to delete "${brand.name}"?`,
+            result: (willDelete) => {
+                if (willDelete) {
+                    Inertia.delete(`/brand/delete/${brand.id}`, {
+                        headers: { "X-CSRF-Token": brand.csrfToken },
+                        preserveState: true,
+                        preservescroll: true,
+                        only: ["brands", "flashMessages"]
+                    });
+                }
+            }
+        });
     }
 </script>
 
@@ -47,7 +53,7 @@
         <thead>
             <th data-key="name">Name</th>
             <th data-key="(row) => Array.isArray(row?.foods) ? row.foods.map(f => f.name).join(' ') : 'No food'">Foods</th>
-            <th class="w-25">Actions</th>
+            <th>Actions</th>
         </thead>
         <tbody>
             {#if rows}
@@ -57,7 +63,7 @@
                         <td class="whitespace-nowrap px-3 py-4 text-sm">
                             <TableRowRelations entities={row.foods} routePrefix="/food/edit/" emptyMessage="No food" />
                         </td>
-                        <td class="w-25">
+                        <td>
                             <Button
                                 size="sm"
                                 background="bg-accent-600"
@@ -66,6 +72,7 @@
                                 weight="ring-none"
                                 rounded="rounded-lg"
                                 width="w-auto"
+                                class="my-1 ml-1"
                                 on:click={() => Inertia.visit(`/brand/edit/${row.id}`)}
                             >
                                 <span slot="lead" class="fill-surface-200"><Icon src={AiFillEdit} /></span>
@@ -79,6 +86,7 @@
                                 weight="ring-none"
                                 rounded="rounded-lg"
                                 width="w-auto"
+                                class="my-1 ml-1"
                                 on:click={() => deleteBrand(row)}
                             >
                                 <span slot="lead" class="fill-surface-200"><Icon src={AiFillDelete} /></span>

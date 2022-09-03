@@ -12,6 +12,7 @@
     import { Drawer } from "@brainandbones/skeleton";
     import { GradientHeading } from "@brainandbones/skeleton";
     import CgClose from "svelte-icons-pack/cg/CgClose";
+    import { Dialog } from "@brainandbones/skeleton";
 
     import { title, description } from "./stores/seo";
     import { drawer } from "./stores/drawer";
@@ -103,6 +104,12 @@
             </div>
         </div>
     </div>
+    <Dialog
+        backdrop="bg-primary-600/50 dark:bg-primary-400/50"
+        blur="backdrop-blur-sm"
+        card="bg-primary-300 dark:bg-primary-700 text-surface-700 dark:text-surface-300"
+        duration={250}
+    />
 </div>
 
 <style lang="scss">

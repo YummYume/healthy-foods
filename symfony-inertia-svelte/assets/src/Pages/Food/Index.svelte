@@ -6,6 +6,7 @@
     import AiFillDelete from "svelte-icons-pack/ai/AiFillDelete";
     import AiFillEdit from "svelte-icons-pack/ai/AiFillEdit";
     import { Datatable } from "svelte-simple-datatables";
+    import { dialogStore } from "@brainandbones/skeleton";
 
     import { title } from "@stores/seo";
     import TableRowRelations from "../../Components/Utils/TableRowRelations.svelte";
@@ -19,16 +20,21 @@
     title.set(`Food list`);
 
     function deleteFood(food) {
-        const willDelete = confirm(`Are you sure you want to delete "${food.name}"?`);
-
-        if (willDelete) {
-            Inertia.delete(`/food/delete/${food.id}`, {
-                headers: { "X-CSRF-Token": food.csrfToken },
-                preserveState: true,
-                preservescroll: true,
-                only: ["foods", "flashMessages"]
-            });
-        }
+        dialogStore.trigger({
+            type: "confirm",
+            title: "Please Confirm",
+            body: `Are you sure you want to delete "${food.name}"?`,
+            result: (willDelete) => {
+                if (willDelete) {
+                    Inertia.delete(`/food/delete/${food.id}`, {
+                        headers: { "X-CSRF-Token": food.csrfToken },
+                        preserveState: true,
+                        preservescroll: true,
+                        only: ["foods", "flashMessages"]
+                    });
+                }
+            }
+        });
     }
 </script>
 
@@ -76,6 +82,7 @@
                                 weight="ring-none"
                                 rounded="rounded-lg"
                                 width="w-auto"
+                                class="my-1 ml-1"
                                 on:click={() => Inertia.visit(`/food/edit/${row.id}`)}
                             >
                                 <span slot="lead" class="fill-surface-200"><Icon src={AiFillEdit} /></span>
@@ -89,6 +96,7 @@
                                 weight="ring-none"
                                 rounded="rounded-lg"
                                 width="w-auto"
+                                class="my-1 ml-1"
                                 on:click={() => deleteFood(row)}
                             >
                                 <span slot="lead" class="fill-surface-200"><Icon src={AiFillDelete} /></span>

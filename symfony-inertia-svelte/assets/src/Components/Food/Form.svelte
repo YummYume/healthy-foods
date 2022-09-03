@@ -2,64 +2,65 @@
     import { Button } from "@brainandbones/skeleton";
     import Icon from "svelte-icons-pack/Icon.svelte";
     import AiOutlineCheck from "svelte-icons-pack/ai/AiOutlineCheck";
+    import Select from "svelte-select";
 
     import FormError from "@app/Components/Utils/FormError.svelte";
 
     export let form;
     export let categories = [];
     export let brands = [];
-
-    let selectedCategories = $form.categories.map((c) => c.id);
-
-    $: handleSelectedCategories(selectedCategories);
-
-    function handleSelectedCategories(newCategories) {
-        $form.categories = categories.filter((c) => newCategories.includes(c.id));
-    }
 </script>
 
 <form on:submit|preventDefault class="my-10">
     <div class="form-group" class:invalid={$form.errors.name}>
         <label for="name">Name</label>
-        <input name="name" class="form-input px-4 py-3 rounded-full" type="text" required bind:value={$form.name} />
+        <input id="name" name="name" class="form-input" type="text" required bind:value={$form.name} />
         {#if $form.errors.name}
             <FormError errors={$form.errors.name} />
         {/if}
     </div>
     <div class="form-group" class:invalid={$form.errors.calories}>
         <label for="calories">Calories</label>
-        <input name="calories" class="form-input px-4 py-3 rounded-full" type="number" min="0" bind:value={$form.calories} />
+        <input id="calories" name="calories" class="form-input" type="number" min="0" bind:value={$form.calories} />
         {#if $form.errors.calories}
             <FormError errors={$form.errors.calories} />
         {/if}
     </div>
     <div class="form-group" class:invalid={$form.errors.categories}>
         <label for="categories">Categories</label>
-        <select name="categories" class="form-multiselect px-4 py-3 rounded-full" type="number" multiple bind:value={selectedCategories}>
-            {#each categories as category}
-                <option value={category.id}>{category.name}</option>
-            {/each}
-        </select>
+        <Select
+            id="categories"
+            hasError={$form.errors.categories}
+            items={categories}
+            value={$form.categories?.length > 0 ? $form.categories : null}
+            isMulti
+            labelIdentifier="name"
+            optionIdentifier="id"
+            inputStyles="box-shadow: none; height: 32px; border-radius: 0px;"
+            containerStyles="min-height: 50px;"
+            placeholder="None"
+            on:select={(e) => ($form.categories = e.detail ?? [])}
+            on:clear={(e) => ($form.categories = e.detail ?? [])}
+        />
         {#if $form.errors.categories}
             <FormError errors={$form.errors.categories} />
         {/if}
     </div>
-    <div class="form-group" class:invalid={$form.errors.brands}>
-        <label for="brands">Brand</label>
-        <select
-            name="brands"
-            class="form-select px-4 py-3 rounded-full"
-            type="number"
-            value={$form.brand?.id}
-            on:change={(e) => ($form.brand = brands.find((b) => b.id.toString() === e.target.value))}
-        >
-            <option value={null} />
-            {#each brands as brand}
-                <option value={brand.id}>{brand.name}</option>
-            {/each}
-        </select>
-        {#if $form.errors.brands}
-            <FormError errors={$form.errors.brands} />
+    <div class="form-group" class:invalid={$form.errors.brand}>
+        <label for="brand">Brand</label>
+        <Select
+            id="brand"
+            hasError={$form.errors.brand}
+            items={brands}
+            value={$form.brand}
+            labelIdentifier="name"
+            optionIdentifier="id"
+            placeholder="None"
+            on:select={(e) => ($form.brand = e.detail)}
+            on:clear={() => ($form.brand = null)}
+        />
+        {#if $form.errors.brand}
+            <FormError errors={$form.errors.brand} />
         {/if}
     </div>
     {#if $form.errors.food}

@@ -11,7 +11,7 @@
 <form on:submit|preventDefault class="my-10">
     <div class="form-group" class:invalid={$form.errors.name}>
         <label for="name">Name</label>
-        <input name="name" class="form-input px-4 py-3 rounded-full" type="text" required bind:value={$form.name} />
+        <input id="name" name="name" class="form-input" type="text" required bind:value={$form.name} />
         {#if $form.errors.name}
             <FormError errors={$form.errors.name} />
         {/if}
