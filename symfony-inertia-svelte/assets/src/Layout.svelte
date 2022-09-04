@@ -16,6 +16,8 @@
     import { _, isLoading, locale, locales } from "svelte-i18n";
     import Select from "svelte-select";
     import axios from "axios";
+    import { RingLoader } from "svelte-loading-spinners";
+    import { fade } from "svelte/transition";
 
     import { title, description } from "./stores/seo";
     import { drawer } from "./stores/drawer";
@@ -66,8 +68,8 @@
 </svelte:head>
 
 <div id="app-layout" class="min-h-screen w-full bg-surface-100 dark:bg-surface-800 text-surface-700 dark:text-surface-300">
-    <div class="flex">
-        {#if !$isLoading}
+    {#if !$isLoading}
+        <div class="flex" transition:fade>
             <Drawer visible={drawer} fixed="left">
                 <div slot="header" class="relative">
                     <GradientHeading
@@ -129,10 +131,13 @@
                     <Icon src={AiOutlineMenu} size="1.8rem" />
                 </div>
             </div>
-        {:else}
-            <div>Loading...</div>
-        {/if}
-    </div>
+        </div>
+    {:else}
+        <div class="fixed flex flex-col text-center align-middle gap-3 justify-center top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <RingLoader size="120" color="rgb(var(--color-accent-500))" unit="px" duration="2s" />
+            <span class="text-lg tracking-wide leading-4 text-primary-500">Loading...</span>
+        </div>
+    {/if}
     <Dialog
         backdrop="bg-primary-600/50 dark:bg-primary-400/50"
         blur="backdrop-blur-sm"

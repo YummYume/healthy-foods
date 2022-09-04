@@ -31,7 +31,7 @@
             labels: {
                 search: $_("common.search"),
                 filter: $_("common.filter"),
-                noRows: $_("datatable.no_rows"),
+                noRows: $_("datatable.no_row"),
                 info: $_("datatable.info"),
                 previous: $_("common.previous"),
                 next: $_("common.next")
@@ -73,7 +73,7 @@
         <Datatable {settings} data={categories} bind:dataRows={rows}>
             <thead>
                 <th data-key="name">{$_("category.name")}</th>
-                <th data-key="(row) => Array.isArray(row?.foods) ? row.foods.map(f => f.name).join(' ') : 'No food'">
+                <th data-key={`(row) => Array.isArray(row?.foods) ? row.foods.map(f => f.name).join(' ') : '${$_("category.no_food")}'`}>
                     {$_("category.foods")}
                 </th>
                 <th>{$_("common.actions")}</th>

@@ -31,7 +31,7 @@
             labels: {
                 search: $_("common.search"),
                 filter: $_("common.filter"),
-                noRows: $_("datatable.no_rows"),
+                noRows: $_("datatable.no_row"),
                 info: $_("datatable.info"),
                 previous: $_("common.previous"),
                 next: $_("common.next")
@@ -74,8 +74,8 @@
             <thead>
                 <th data-key="name">{$_("food.name")}</th>
                 <th data-key="name">{$_("food.calories")}</th>
-                <th data-key="(row) => row.brand ?? 'No brand'">{$_("food.brand")}</th>
-                <th data-key="(row) => Array.isArray(row?.foods) ? row.foods.map(f => f.name).join(' ') : 'No food'">
+                <th data-key={`(row) => row.brand ?? '${$_("food.no_brand")}'`}>{$_("food.brand")}</th>
+                <th data-key={`(row) => Array.isArray(row?.foods) ? row.foods.map(f => f.name).join(' ') : '${$_("food.no_category")}'`}>
                     {$_("food.categories")}
                 </th>
                 <th>{$_("common.actions")}</th>
