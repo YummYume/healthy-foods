@@ -13,7 +13,7 @@
         {@const lastIndex = entities.length - 1 !== index}
         <span>
             <Link
-                class="text-primary-400 hover:underline hover:text-primary-600 dark:hover:text-primary-500 transition-all"
+                class="text-primary-600 hover:text-primary-700 hover:underline dark:text-primary-400 dark:hover:text-primary-300 transition-all hover:transition-all"
                 href={`${routePrefix}${entity[id] ?? ""}`}>{entity[name] ?? ""}</Link
             >{lastIndex ? "," : ""}
         </span>

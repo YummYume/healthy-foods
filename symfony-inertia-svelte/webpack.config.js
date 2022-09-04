@@ -57,8 +57,7 @@ Encore
             type: 'https',
             options: {
                 key: './dev-server/server.key',
-                cert: './dev-server/server.crt',
-
+                cert: './dev-server/server.crt'
             }
         }
     });
@@ -66,5 +65,6 @@ Encore
 const config = Encore.getWebpackConfig();
 config.resolve.mainFields = ['svelte', 'browser', 'module', 'main'];
 config.resolve.extensions = ['.wasm', '.mjs', '.js', '.json', '.jsx', '.vue', '.ts', '.tsx', '.svelte'];
+config.devServer.client = { overlay: { warnings: false, errors: true } };
 
 module.exports = config;

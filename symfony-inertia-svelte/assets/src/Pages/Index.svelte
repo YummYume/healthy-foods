@@ -30,10 +30,10 @@
     <p class="my-3">{$_("home.presentation.p4")}</p>
 </div>
 
-<p class="my-3 text-sm text-gray-600">
+<p class="my-3 text-sm text-gray-600 dark:text-gray-400">
     {$_("home.presentation.generated_by")}
     <a
-        class="text-primary-400 hover:underline hover:text-primary-600"
+        class="text-primary-600 hover:text-primary-700 hover:underline dark:text-primary-400 dark:hover:text-primary-300 transition-all hover:transition-all"
         href="https://app.inferkit.com/demo"
         alt="app.inferkit.com"
         target="_blank"

@@ -89,10 +89,10 @@
                     {#each menuItems as menuItem}
                         {@const selected = route?.startsWith(menuItem.prefix)}
                         <Link
-                            class={`flex items-center space-x-1 rounded-md px-2 py-3 my-2 ${
+                            class={`flex items-center space-x-1 rounded-md px-2 py-3 my-2 transition-all hover:transition-all ${
                                 selected
-                                    ? "bg-surface-300 text-primary-600 fill-primary-600"
-                                    : "dark:text-primary-200 dark:fill-primary-200 hover:bg-surface-300 hover:text-primary-600 dark:hover:text-primary-600 hover:fill-primary-600 dark:hover:fill-primary-600"
+                                    ? "bg-surface-300 text-primary-700 fill-primary-700"
+                                    : "dark:text-primary-200 dark:fill-primary-200 hover:bg-surface-300 hover:text-primary-700 dark:hover:text-primary-700 hover:fill-primary-700 dark:hover:fill-primary-700"
                             }`}
                             href={menuItem.path}
                         >
@@ -104,6 +104,7 @@
                 <div slot="footer" class="flex items-center gap-6 p-5">
                     <LightSwitch />
                     <div class="!my-0 grow form-group">
+                        <label for="locale" class="tracking-wide leading-4 mb-1">{$_("common.language")}</label>
                         <Select
                             id="locale"
                             items={availableLocales}
