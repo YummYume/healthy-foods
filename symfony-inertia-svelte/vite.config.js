@@ -4,6 +4,7 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import mkcert from 'vite-plugin-mkcert';
 import autoPreprocess from 'svelte-preprocess';
 import path from 'path';
+import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig(({ command }) => {
     const isDev = 'serve' === command;
@@ -23,6 +24,7 @@ export default defineConfig(({ command }) => {
                 }
             }),
             mkcert(),
+            viteCompression(),
         ],
         css: {
             postCss: {
