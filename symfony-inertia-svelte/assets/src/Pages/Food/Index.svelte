@@ -73,8 +73,8 @@
         <Datatable {settings} data={foods} bind:dataRows={rows}>
             <thead>
                 <th data-key="name">{$_("food.name")}</th>
-                <th data-key="name">{$_("food.calories")}</th>
-                <th data-key={`(row) => row.brand ?? '${$_("food.no_brand")}'`}>{$_("food.brand")}</th>
+                <th data-key="calories">{$_("food.calories")}</th>
+                <th data-key={`(row) => row.brand.name ?? '${$_("food.no_brand")}'`}>{$_("food.brand")}</th>
                 <th data-key={`(row) => Array.isArray(row?.foods) ? row.foods.map(f => f.name).join(' ') : '${$_("food.no_category")}'`}>
                     {$_("food.categories")}
                 </th>
