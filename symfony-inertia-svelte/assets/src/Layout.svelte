@@ -17,7 +17,6 @@
     import Select from "svelte-select";
     import axios from "axios";
     import { RingLoader } from "svelte-loading-spinners";
-    import { blur } from "svelte/transition";
 
     import { title, description } from "./stores/seo";
     import { drawer } from "./stores/drawer";
@@ -69,7 +68,7 @@
 
 <div id="app-layout" class="min-h-screen w-full bg-surface-100 dark:bg-surface-800 text-surface-700 dark:text-surface-300">
     {#if !$isLoading}
-        <div class="flex" transition:blur>
+        <div class="flex">
             <Drawer visible={drawer} fixed="left">
                 <div slot="header" class="relative">
                     <GradientHeading

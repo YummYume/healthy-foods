@@ -65,6 +65,9 @@ Encore
 const config = Encore.getWebpackConfig();
 config.resolve.mainFields = ['svelte', 'browser', 'module', 'main'];
 config.resolve.extensions = ['.wasm', '.mjs', '.js', '.json', '.jsx', '.vue', '.ts', '.tsx', '.svelte'];
-config.devServer.client = { overlay: { warnings: false, errors: true } };
+
+if (!Encore.isProduction()) {
+    config.devServer.client = { overlay: { warnings: false, errors: true } };
+}
 
 module.exports = config;
