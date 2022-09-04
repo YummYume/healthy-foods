@@ -1,0 +1,16 @@
+### Entities
+# Food
+food.unique: L'aliment {value} existe déjà pour la marque sélectionnée.
+food.name.max_length: Le nom ne peut pas dépasser {limit} caractères.
+food.name.not_blank: Le nom ne peut pas être vide.
+food.calories.positive_or_zero: Les calories doivent être égales ou supérieures à 0.
+
+# Category
+category.unique: La catégorie {value} existe déjà.
+category.name.max_length: Le nom ne peut pas dépasser {limit} caractères.
+category.name.not_blank: Le nom ne peut pas être vide.
+
+# Brand
+brand.unique: La marque {value} existe déjà.
+brand.name.max_length: Le nom ne peut pas dépasser {limit} caractères.
+brand.name.not_blank: Le nom ne peut pas être vide.

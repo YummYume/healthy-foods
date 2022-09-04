@@ -4,15 +4,16 @@
     import { Button, GradientHeading } from "@brainandbones/skeleton";
     import Icon from "svelte-icons-pack/Icon.svelte";
     import TiArrowBack from "svelte-icons-pack/ti/TiArrowBack";
+    import { _ } from "svelte-i18n";
 
     import Form from "@app/Components/Brand/Form.svelte";
     import { title } from "@stores/seo";
 
     export let brand;
 
-    title.set("Add a new brand");
-
     let form = useForm(brand);
+
+    $: $_("brand.add"), title.set($_("brand.add"));
 
     function submit() {
         $form
@@ -26,7 +27,7 @@
 </script>
 
 <GradientHeading class="w-full text-center mb-10 text-4xl" tag="h2" direction="bg-gradient-to-r" from="from-primary-600" to="to-accent-600">
-    Add a brand
+    {$_("brand.add")}
 </GradientHeading>
 
 <Form on:submit={submit} {form} />
@@ -42,5 +43,5 @@
     on:click={() => Inertia.visit(`/brand`)}
 >
     <span slot="lead" class="fill-surface-200"><Icon src={TiArrowBack} /></span>
-    <span>Back to brand list</span>
+    <span>{$_("brand.back_to_list")}</span>
 </Button>

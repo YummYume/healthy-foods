@@ -3,6 +3,7 @@
     import Icon from "svelte-icons-pack/Icon.svelte";
     import AiOutlineCheck from "svelte-icons-pack/ai/AiOutlineCheck";
     import Select from "svelte-select";
+    import { _ } from "svelte-i18n";
 
     import FormError from "@app/Components/Utils/FormError.svelte";
 
@@ -13,21 +14,21 @@
 
 <form on:submit|preventDefault class="my-10">
     <div class="form-group" class:invalid={$form.errors.name}>
-        <label for="name">Name</label>
+        <label for="name">{$_("food.name")}</label>
         <input id="name" name="name" class="form-input" type="text" required bind:value={$form.name} />
         {#if $form.errors.name}
             <FormError errors={$form.errors.name} />
         {/if}
     </div>
     <div class="form-group" class:invalid={$form.errors.calories}>
-        <label for="calories">Calories</label>
+        <label for="calories">{$_("food.calories")}</label>
         <input id="calories" name="calories" class="form-input" type="number" min="0" bind:value={$form.calories} />
         {#if $form.errors.calories}
             <FormError errors={$form.errors.calories} />
         {/if}
     </div>
     <div class="form-group" class:invalid={$form.errors.categories}>
-        <label for="categories">Categories</label>
+        <label for="categories">{$_("food.categories")}</label>
         <Select
             id="categories"
             hasError={$form.errors.categories}
@@ -38,7 +39,7 @@
             optionIdentifier="id"
             inputStyles="box-shadow: none; height: 32px; border-radius: 0px;"
             containerStyles="min-height: 50px;"
-            placeholder="None"
+            placeholder={$_("common.none")}
             on:select={(e) => ($form.categories = e.detail ?? [])}
             on:clear={(e) => ($form.categories = e.detail ?? [])}
         />
@@ -47,7 +48,7 @@
         {/if}
     </div>
     <div class="form-group" class:invalid={$form.errors.brand}>
-        <label for="brand">Brand</label>
+        <label for="brand">{$_("food.brand")}</label>
         <Select
             id="brand"
             hasError={$form.errors.brand}
@@ -55,7 +56,7 @@
             value={$form.brand}
             labelIdentifier="name"
             optionIdentifier="id"
-            placeholder="None"
+            placeholder={$_("common.none")}
             on:select={(e) => ($form.brand = e.detail)}
             on:clear={() => ($form.brand = null)}
         />
@@ -81,6 +82,6 @@
         disabled={$form.processing}
     >
         <span slot="lead" class="fill-surface-200"><Icon src={AiOutlineCheck} /></span>
-        <span>Save</span>
+        <span>{$_("common.save")}</span>
     </Button>
 </form>

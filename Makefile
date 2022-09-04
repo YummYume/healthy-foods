@@ -4,6 +4,12 @@ EXECAPP=$(COMPOSE) exec app
 EXECNGINX=$(COMPOSE) exec nginx
 EXECREACT=$(COMPOSE) exec react
 EXECSVELTE=$(COMPOSE) exec svelte
+ifeq (translations,$(firstword $(MAKECMDGOALS)))
+  # use the rest as arguments for "run"
+  RUN_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+  # ...and turn them into do-nothing targets
+  $(eval $(RUN_ARGS):;@:)
+endif
 
 start: up perm vendor db cc sync-all
 
@@ -11,6 +17,7 @@ up:
 	docker kill $$(docker ps -q) || true
 	$(COMPOSE) build --force-rm
 	$(COMPOSE) up -d
+	make translations
 
 stop:
 	$(COMPOSE) stop
@@ -52,6 +59,9 @@ endif
 cc:
 	$(EXECAPP) bin/console c:cl --no-warmup
 	$(EXECAPP) bin/console c:warmup
+
+translations:
+	$(EXECAPP) yarn translations $(RUN_ARGS)
 
 sync-react-node-modules:
 	@echo Syncing React node_modules dependencies...

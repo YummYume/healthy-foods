@@ -7,23 +7,43 @@
     import AiFillEdit from "svelte-icons-pack/ai/AiFillEdit";
     import { Datatable } from "svelte-simple-datatables";
     import { dialogStore } from "@brainandbones/skeleton";
+    import { _, locale } from "svelte-i18n";
 
     import { title } from "@stores/seo";
     import TableRowRelations from "../../Components/Utils/TableRowRelations.svelte";
 
     export let foods;
 
-    const settings = { sortable: true, pagination: true, scrollY: true, rowsPerPage: 50, columnFilter: true, css: false };
-
     let rows;
+    let settings = { sortable: true, pagination: true, scrollY: true, rowsPerPage: 50, columnFilter: true, css: false };
 
-    title.set(`Food list`);
+    $: $locale, (settings = setDatatableSettings());
+    $: $_("food.list"), title.set($_("food.list"));
+
+    function setDatatableSettings() {
+        return {
+            sortable: true,
+            pagination: true,
+            scrollY: true,
+            rowsPerPage: 50,
+            columnFilter: true,
+            css: false,
+            labels: {
+                search: $_("common.search"),
+                filter: $_("common.filter"),
+                noRows: $_("datatable.no_rows"),
+                info: $_("datatable.info"),
+                previous: $_("common.previous"),
+                next: $_("common.next")
+            }
+        };
+    }
 
     function deleteFood(food) {
         dialogStore.trigger({
             type: "confirm",
-            title: "Please Confirm",
-            body: `Are you sure you want to delete "${food.name}"?`,
+            title: $_("dialog.delete.confirm"),
+            body: $_("dialog.delete.are_you_sure", { values: { name: food.name } }),
             result: (willDelete) => {
                 if (willDelete) {
                     Inertia.delete(`/food/delete/${food.id}`, {
@@ -45,69 +65,77 @@
     from="from-warning-300"
     to="to-primary-600"
 >
-    Food list
+    {$_("food.list")}
 </GradientHeading>
 
 <div class="datatable-container">
-    <Datatable {settings} data={foods} bind:dataRows={rows}>
-        <thead>
-            <th data-key="name">Name</th>
-            <th data-key="name">Calories</th>
-            <th data-key="(row) => row.brand ?? 'No brand'">Brand</th>
-            <th data-key="(row) => Array.isArray(row?.foods) ? row.foods.map(f => f.name).join(' ') : 'No food'">Categories</th>
-            <th>Actions</th>
-        </thead>
-        <tbody>
-            {#if rows}
-                {#each $rows as row}
-                    <tr>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm">{row.name}</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm">{row.calories}</td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm">
-                            <TableRowRelations
-                                entities={() => (row.brand ? [row.brand] : [])}
-                                routePrefix="/brand/edit/"
-                                emptyMessage="No brand"
-                            />
-                        </td>
-                        <td class="whitespace-nowrap px-3 py-4 text-sm">
-                            <TableRowRelations entities={row.categories} routePrefix="/category/edit/" emptyMessage="No category" />
-                        </td>
-                        <td>
-                            <Button
-                                size="sm"
-                                background="bg-accent-600"
-                                color="text-surface-200"
-                                ring="ring-transparent"
-                                weight="ring-none"
-                                rounded="rounded-lg"
-                                width="w-auto"
-                                class="my-1 ml-1"
-                                on:click={() => Inertia.visit(`/food/edit/${row.id}`)}
-                            >
-                                <span slot="lead" class="fill-surface-200"><Icon src={AiFillEdit} /></span>
-                                <span>Edit</span>
-                            </Button>
-                            <Button
-                                size="sm"
-                                background="bg-warning-600"
-                                color="text-surface-200"
-                                ring="ring-transparent"
-                                weight="ring-none"
-                                rounded="rounded-lg"
-                                width="w-auto"
-                                class="my-1 ml-1"
-                                on:click={() => deleteFood(row)}
-                            >
-                                <span slot="lead" class="fill-surface-200"><Icon src={AiFillDelete} /></span>
-                                <span>Delete</span>
-                            </Button>
-                        </td>
-                    </tr>
-                {/each}
-            {/if}
-        </tbody>
-    </Datatable>
+    {#key $locale}
+        <Datatable {settings} data={foods} bind:dataRows={rows}>
+            <thead>
+                <th data-key="name">{$_("food.name")}</th>
+                <th data-key="name">{$_("food.calories")}</th>
+                <th data-key="(row) => row.brand ?? 'No brand'">{$_("food.brand")}</th>
+                <th data-key="(row) => Array.isArray(row?.foods) ? row.foods.map(f => f.name).join(' ') : 'No food'">
+                    {$_("food.categories")}
+                </th>
+                <th>{$_("common.actions")}</th>
+            </thead>
+            <tbody>
+                {#if rows}
+                    {#each $rows as row}
+                        <tr>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm">{row.name}</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm">{row.calories}</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                <TableRowRelations
+                                    entities={() => (row.brand ? [row.brand] : [])}
+                                    routePrefix="/brand/edit/"
+                                    emptyMessage={$_("food.no_brand")}
+                                />
+                            </td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                <TableRowRelations
+                                    entities={row.categories}
+                                    routePrefix="/category/edit/"
+                                    emptyMessage={$_("food.no_category")}
+                                />
+                            </td>
+                            <td>
+                                <Button
+                                    size="sm"
+                                    background="bg-accent-600"
+                                    color="text-surface-200"
+                                    ring="ring-transparent"
+                                    weight="ring-none"
+                                    rounded="rounded-lg"
+                                    width="w-auto"
+                                    class="my-1 ml-1"
+                                    on:click={() => Inertia.visit(`/food/edit/${row.id}`)}
+                                >
+                                    <span slot="lead" class="fill-surface-200"><Icon src={AiFillEdit} /></span>
+                                    <span>{$_("common.edit")}</span>
+                                </Button>
+                                <Button
+                                    size="sm"
+                                    background="bg-warning-600"
+                                    color="text-surface-200"
+                                    ring="ring-transparent"
+                                    weight="ring-none"
+                                    rounded="rounded-lg"
+                                    width="w-auto"
+                                    class="my-1 ml-1"
+                                    on:click={() => deleteFood(row)}
+                                >
+                                    <span slot="lead" class="fill-surface-200"><Icon src={AiFillDelete} /></span>
+                                    <span>{$_("common.delete")}</span>
+                                </Button>
+                            </td>
+                        </tr>
+                    {/each}
+                {/if}
+            </tbody>
+        </Datatable>
+    {/key}
 </div>
 
 <Button
@@ -121,5 +149,5 @@
     on:click={() => Inertia.visit("/food/add")}
 >
     <span slot="lead" class="fill-surface-200"><Icon src={AiOutlinePlus} /></span>
-    <span>Add a food</span>
+    <span>{$_("food.add")}</span>
 </Button>

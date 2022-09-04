@@ -8,6 +8,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -20,9 +21,18 @@ final class InertiaSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
+            KernelEvents::REQUEST => ['onKernelRequest', 105],
             KernelEvents::CONTROLLER => ['onKernelController', 50],
             KernelEvents::EXCEPTION => ['onKernelException', 50],
         ];
+    }
+
+    public function onKernelRequest(RequestEvent $event): void
+    {
+        $request = $event->getRequest();
+        $locale = $request->headers->get('i18n-locale', 'en');
+
+        $request->setlocale($locale);
     }
 
     public function onKernelController(ControllerEvent $event): void

@@ -2,6 +2,7 @@
     import { Button } from "@brainandbones/skeleton";
     import Icon from "svelte-icons-pack/Icon.svelte";
     import AiOutlineCheck from "svelte-icons-pack/ai/AiOutlineCheck";
+    import { _ } from "svelte-i18n";
 
     import FormError from "@app/Components/Utils/FormError.svelte";
 
@@ -10,7 +11,7 @@
 
 <form on:submit|preventDefault class="my-10">
     <div class="form-group" class:invalid={$form.errors.name}>
-        <label for="name">Name</label>
+        <label for="name">{$_("category.name")}</label>
         <input id="name" name="name" class="form-input" type="text" required bind:value={$form.name} />
         {#if $form.errors.name}
             <FormError errors={$form.errors.name} />
@@ -34,6 +35,6 @@
         disabled={$form.processing}
     >
         <span slot="lead" class="fill-surface-200"><Icon src={AiOutlineCheck} /></span>
-        <span>Save</span>
+        <span>{$_("common.save")}</span>
     </Button>
 </form>

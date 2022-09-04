@@ -25,25 +25,39 @@ App should run on `localhost`.
 
 ## Commands (Makefile)
 
-| Command                  | Usage                                                                   | Note                                                  |
-| ------------------------ | ----------------------------------------------------------------------- | ----------------------------------------------------- |
-| start                    | Builds and starts containers, then installs dependencies and creates db | Should only be used for fresh starts (will delete db) |
-| up                       | Builds and starts containers                                            |                                                       |
-| stop                     | Stops and kills running containers                                      |                                                       |
-| rm                       | Removes stopped containers                                              |                                                       |
-| vendor                   | Installs vendor dependencies for the Symfony app                        |                                                       |
-| ssh                      | Use to sh into the Symfony App container                                | Container `app`                                       |
-| shh-react                | Use to sh into the React App container                                  | Container `react`                                     |
-| shh-svelte               | Use to sh into the Svelte App container                                 | Container `svelte`                                    |
-| db                       | Deletes (if it exist) the current db, then recreates it (with fixtures) |                                                       |
-| perm                     | Gives rights to Symfony App files                                       | Useful after a `make:entity` for example              |
-| cc                       | Clears Symfony App cache and then warmup                                |                                                       |
-| sync-react-node-modules  | Copies the `node_modules` folder from the React App to host             |                                                       |
-| sync-svelte-node-modules | Copies the `node_modules` folder from the Svelte App to host            |                                                       |
-| sync-node-modules        | Copies the `node_modules` folder from the Symfony App to host           |                                                       |
-| sync-all                 | Copies all `node_modules` folders to host                               |                                                       |
+| Command                  | Usage                                                                              | Note                                                  |
+| ------------------------ | ---------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| start                    | Builds and starts containers, then installs dependencies and creates db            | Should only be used for fresh starts (will delete db) |
+| up                       | Builds and starts containers                                                       |                                                       |
+| stop                     | Stops and kills running containers                                                 |                                                       |
+| rm                       | Removes stopped containers                                                         |                                                       |
+| vendor                   | Installs vendor dependencies for the Symfony app                                   |                                                       |
+| ssh                      | Use to sh into the Symfony App container                                           | Container `app`                                       |
+| shh-react                | Use to sh into the React App container                                             | Container `react`                                     |
+| shh-svelte               | Use to sh into the Svelte App container                                            | Container `svelte`                                    |
+| db                       | Deletes (if it exist) the current db, then recreates it (with fixtures)            |                                                       |
+| perm                     | Gives rights to Symfony App files                                                  | Useful after a `make:entity` for example              |
+| cc                       | Clears Symfony App cache and then warmup                                           |                                                       |
+| translations             | Parses the `.yaml` translations to `.json` inside the `translations/parsed` folder | See below for more info                               |
+| sync-react-node-modules  | Copies the `node_modules` folder from the React App to host                        |                                                       |
+| sync-svelte-node-modules | Copies the `node_modules` folder from the Svelte App to host                       |                                                       |
+| sync-node-modules        | Copies the `node_modules` folder from the Symfony App to host                      |                                                       |
+| sync-all                 | Copies all `node_modules` folders to host                                          |                                                       |
 
 The sync commands are here because node_modules are not shared with the host (to avoid startup problems), but you might still want them for your IDE to use.
+
+## Translations
+
+Translating is done using [Svelte i18n](https://github.com/kaisermann/svelte-i18n).
+Since `.yaml` files are way more developer-friendly than `.json`, I created a parser (`parser.js`) which parses the `.yaml` files in the `translations` folder into `.json` files in the `translations/parsed` folder which Svelte i18n then uses.
+
+**Usage** : `yarn translations [FILES_TO_TRANSLATE|optional]`.
+
+**Example** : `yarn translations en fr` --> will translate only `en.yaml` and `fr.yaml`, if they exist.
+
+If no argument is specified, all `.yaml` files with a valid name will be translated.
+
+Translations on the server-side are just like regular translations with Symfony (mostly for form validations). Note that the current locale is automatically sent via headers with every request, so you don't have to worry about it.
 
 ## About Vite
 

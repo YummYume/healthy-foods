@@ -1,0 +1,98 @@
+# Common
+common.welcome_title: Bienvenue sur {name}!
+common.close: Fermer
+common.confirm: Confirmer
+common.edit: Modifier
+common.save: Sauvegarder
+common.delete: Supprimer
+common.search: Rechercher
+common.filter: Filtrer
+common.actions: Actions
+common.previous: Précédent
+common.next: Suivant
+common.none: Aucun(e)
+common.language: Langue
+
+# Menu
+menu.home: Accueil
+menu.foods: Aliments
+menu.categories: Catégories
+menu.brands: Marques
+
+# Seo
+home.description: Bienvenue sur la page d'accueil de Healthy Food!
+food.title: Modifier l'aliment "{name}"
+category.title: Modifier la catégorie "{name}"
+brand.title: Modifier la marque "{name}"
+
+# Dialog
+dialog.delete.confirm: Veuillez Confirmer
+dialog.delete.are_you_sure: Voulez-vous vraiment supprimer "{name}" ?
+
+# Datatable
+datatable.info: Affichage des entrées {start} à {end} sur {rows}
+datatable.no_row: Aucune entrée trouvée
+
+# Home
+home.presentation.p1: >
+    Healthy Food est là pour vous aider à gérer vos repas quotidiens. Vous pouvez utiliser Healthy Food pour suivre les calories des aliments et quelle marque
+    les vend! C'est pour toute personne qui aime la nourriture! Chacun de nous a des besoins alimentaires différents, donc Healthy Food répondra à tous
+    pour toi!
+home.presentation.p2: >
+    Healthy Food vous donne un moment pour vous reposer et reprendre votre souffle après toute la difficile journée de shopping que nous avons eue!
+home.presentation.p3.li1: Healthy Food vous offre la livraison gratuite et aucun frais de livraison aux États-Unis et au Canada
+home.presentation.p3.li2: Healthy Food vous offre 5% de réduction pour plusieurs commandes
+home.presentation.p3.li3: Healthy Food vous offre la livraison gratuite aux États-Unis et au Canada
+home.presentation.p3.li4: Healthy Food vous permet de sélectionner votre date de livraison (du dimanche au samedi)
+home.presentation.p4: >
+    Healthy Food propose toutes sortes de plats délicieux pour chaque foyer. Une alimentation saine vous évitera de manger des aliments qui ne sont peut-être pas
+    sain pour votre corps. Healthy Food est spécialement conçu pour vous aider à contrôler la taille de vos portions. Healthy Food est là pour faire de votre
+    la vie plus facile et meilleure.
+home.presentation.generated_by: Texte généré par
+# Food
+food.list: Liste des aliments
+food.add: Ajouter un aliment
+food.edit: Modifier un aliment
+food.back_to_list: Revenir à la liste des aliments
+food.no_brand: Aucune marque
+food.no_category: Aucune catégorie
+
+# Category
+category.list: Liste des catégories
+category.add: Ajouter une catégorie
+category.edit: Modifier une catégorie
+category.no_food: Aucun aliment
+
+# Brand
+brand.list: Liste des marques
+brand.add: Ajouter une marque
+brand.edit: Modifier une marque
+brand.back_to_list: Revenir à la liste des marques
+brand.no_food: Aucun aliment
+
+# Entities
+# Food
+food.name: Nom
+food.calories: Calories
+food.categories: Catégories
+food.brand: Marque
+
+# Category
+category.name: Nom
+category.foods: Aliments
+
+# Brand
+brand.name: Nom
+brand.foods: Aliments
+
+# Exceptions
+exception.503.title: "503: Service Indisponible"
+exception.503.description: Désolé, nous faisons de la maintenance. Veuillez revenir bientôt.
+exception.500.title: "500: Erreur serveur"
+exception.500.description: >
+    Oups, quelque chose s'est mal passé sur nos serveurs. Veuillez réessayer plus tard. Si le problème persiste, contactez un administrateur.
+exception.404.title: "404: Page non trouvée"
+exception.404.description: Désolé, la page que vous recherchez est introuvable.
+exception.403.title: "403: Accès Interdit"
+exception.403.description: Désolé, il vous est interdit d'accéder à cette page.
+exception.home_page: Aller à la page d'accueil

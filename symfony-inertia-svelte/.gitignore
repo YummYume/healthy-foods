@@ -70,3 +70,6 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+# Translations
+/assets/translations/parsed/*.json

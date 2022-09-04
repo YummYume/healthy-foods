@@ -1,0 +1,20 @@
+### Common
+common.invalid_form: Le formulaire que vous avez soumis n'est pas valide. Veuillez vérifier les erreurs et réessayer.
+common.fatal_error: Une erreur inattendue est apparue. Veuillez réessayer plus tard. Si le problème persiste, contactez un administrateur.
+common.invalid_csrf: Le jeton CSRF soumis est invalide ou a expiré. Veuillez réessayer.
+
+### Entities
+# Entity - Food
+food.add.success: L'aliment "{food}" a été ajouté avec succès.
+food.edit.success: L'aliment "{food}" a été modifié avec succès.
+food.remove.success: L'aliment "{food}" a été supprimé avec succès.
+
+# Entity - Category
+category.add.success: La catégorie "{category}" a été ajoutée avec succès.
+category.edit.success: La catégorie "{category}" a été modifiée avec succès.
+category.remove.success: La catégorie "{category}" a été supprimée avec succès.
+
+# Entity - Brand
+brand.add.success: La marque "{brand}" a été ajoutée avec succès.
+brand.edit.success: La marque "{brand}" a été modifiée avec succès.
+brand.remove.success: La marque "{brand}" a été supprimée avec succès.

@@ -7,6 +7,7 @@
     import { Button, GradientHeading } from "@brainandbones/skeleton";
     import Icon from "svelte-icons-pack/Icon.svelte";
     import TiArrowBack from "svelte-icons-pack/ti/TiArrowBack";
+    import { _ } from "svelte-i18n";
 
     import Form from "@app/Components/Food/Form.svelte";
     import { title } from "@stores/seo";
@@ -16,13 +17,12 @@
     export let brands;
     export let easterEgg = false;
 
-    title.set(`Edit "${food.name}" food`);
+    let form = useForm(food);
 
+    $: $_("food.title"), title.set($_("food.title", { values: { name: food.name } }));
     $: if (easterEgg) {
         toast.push("Weeee! Easter egg!");
     }
-
-    let form = useForm(food);
 
     function submit() {
         $form
@@ -46,7 +46,7 @@
 {/if}
 
 <GradientHeading class="w-full text-center mb-10 text-4xl" tag="h2" direction="bg-gradient-to-l" from="from-primary-600" to="to-accent-600">
-    Edit a food
+    {$_("food.edit")}
 </GradientHeading>
 
 <Form on:submit={submit} {form} {categories} {brands} />
@@ -62,7 +62,7 @@
     on:click={() => Inertia.visit(`/food`)}
 >
     <span slot="lead" class="fill-surface-200"><Icon src={TiArrowBack} /></span>
-    <span>Back to food list</span>
+    <span>{$_("food.back_to_list")}</span>
 </Button>
 
 <style lang="scss">
