@@ -88,7 +88,7 @@
                             <td class="whitespace-nowrap px-3 py-4 text-sm">{row.calories}</td>
                             <td class="whitespace-nowrap px-3 py-4 text-sm">
                                 <TableRowRelations
-                                    entities={() => (row.brand ? [row.brand] : [])}
+                                    entities={row.brand ? [row.brand] : []}
                                     routePrefix="/brand/edit/"
                                     emptyMessage={$_("food.no_brand")}
                                 />

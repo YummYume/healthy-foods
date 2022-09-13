@@ -61,6 +61,7 @@ food.no_category: Aucune catégorie
 category.list: Liste des catégories
 category.add: Ajouter une catégorie
 category.edit: Modifier une catégorie
+category.back_to_list: Revenir à la liste des catégories
 category.no_food: Aucun aliment
 
 # Brand
